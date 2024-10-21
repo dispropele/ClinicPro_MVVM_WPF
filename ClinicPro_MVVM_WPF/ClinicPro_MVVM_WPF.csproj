@@ -17,6 +17,7 @@
     <None Remove="Fonts\JetBrainsMono-Medium-Italic.ttf" />
     <None Remove="Fonts\JetBrainsMono-Medium.ttf" />
     <None Remove="Fonts\JetBrainsMono-Regular.ttf" />
+    <None Remove="Resources\Appointment.png" />
     <None Remove="Resources\arrow_back.png" />
     <None Remove="Resources\category.png" />
     <None Remove="Resources\chat_bubble.png" />
@@ -24,8 +25,11 @@
     <None Remove="Resources\Eye.png" />
     <None Remove="Resources\Home.png" />
     <None Remove="Resources\Log out.png" />
+    <None Remove="Resources\logo.png" />
+    <None Remove="Resources\MedCard.png" />
     <None Remove="Resources\medicines.png" />
     <None Remove="Resources\Settings.png" />
+    <None Remove="Resources\User.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +66,9 @@
     <Resource Include="Fonts\JetBrainsMono-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Appointment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\arrow_back.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -83,10 +90,19 @@
     <Resource Include="Resources\Log out.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\MedCard.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\medicines.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\User.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

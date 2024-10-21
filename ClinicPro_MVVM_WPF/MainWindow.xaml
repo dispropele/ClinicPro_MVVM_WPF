@@ -52,29 +52,99 @@
                 <Border Background="#7C92DA"
                         CornerRadius="20,0,0,20"/>
 
-                <StackPanel Height="400"
-                            Width="228">
-                    
+                <StackPanel Height="500"
+                            Width="228"
+                            VerticalAlignment="Bottom">
+
                     <!--// Home //-->
 
                     <menu:Button Style="{StaticResource ButtonStyle}"
                                  Command="{Binding HomeCommand}"
                                  IsChecked="True">
-
                         <Grid>
-
                             <Image Source="/Resources/Home.png"
                                    Style="{StaticResource Image_Style}"/>
                             <TextBlock Text="Home"
                                        Style="{StaticResource Text_Style}"/>
-
                         </Grid>
-                        
-                        
                     </menu:Button>
 
-                </StackPanel>
+                    <!--// MedCard //-->
+
+                    <menu:Button Style="{StaticResource ButtonStyle}"
+                                 Command="{Binding MedCardCommand}">
+                        <Grid>
+                            <Image Source="/Resources/MedCard.png"
+                                   Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="MedCard"
+                                       Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </menu:Button>
+
+                    <!--// Appointment //-->
+
+                    <menu:Button Style="{StaticResource ButtonStyle}"
+                                 Command="{Binding AppointmentCommand}">
+                        <Grid>
+                            <Image Source="/Resources/Appointment.png"
+                                   Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Appointment"
+                                       Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </menu:Button>
+
+                    <!--// Pharma //-->
+
+                    <menu:Button Style="{StaticResource ButtonStyle}"
+                                 Command="{Binding PharmaCommand}">
+                        <Grid>
+                            <Image Source="/Resources/medicines.png"
+                                   Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Pharma"
+                                       Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </menu:Button>
+
+                    <!--// Chat //-->
+
+                    <menu:Button Style="{StaticResource ButtonStyle}"
+                                 Command="{Binding ChatCommand}">
+                        <Grid>
+                            <Image Source="/Resources/chat_bubble.png"
+                                   Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Chat"
+                                       Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </menu:Button>
+
                 
+
+                    <!--// Settings //-->
+                    
+                    <menu:Button Style="{StaticResource ButtonStyle}"
+                                 Command="{Binding SettingsCommand}"
+                                 Margin="0 100 0 0">
+                        <Grid>
+                            <Image Source="/Resources/Settings.png"
+                                   Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Settings"
+                                       Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </menu:Button>
+
+                    <!--// Account //-->
+
+                    <menu:Button Style="{StaticResource ButtonStyle}"
+                                 Command="{Binding AccountCommand}">
+                        <Grid>
+                            <Image Source="/Resources/User.png"
+                                   Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Account"
+                                       Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </menu:Button>
+                </StackPanel>
+
             </Grid>
             
             <!--// Header //-->
