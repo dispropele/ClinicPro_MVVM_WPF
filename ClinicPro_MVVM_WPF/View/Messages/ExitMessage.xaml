@@ -6,9 +6,74 @@
         xmlns:local="clr-namespace:ClinicPro_MVVM_WPF.View.Messages"
         mc:Ignorable="d" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True"
-        Title="ExitMessage" Height="150" Width="250">
+        Title="ExitMessage" Height="150" Width="250" WindowStartupLocation="CenterOwner">
     <Grid>
         <!-- Фон сообщения -->
-        <Border Background="#304068" CornerRadius="20"/>
+        <Border Background="#304068"
+                CornerRadius="20"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"/>
+
+        <TextBlock Text="Вы точно хотите"
+                   Style="{StaticResource Text_Style}"
+                   Grid.ColumnSpan="2"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0 15 0 0"/>
+        <TextBlock Text="выйти?"
+           Style="{StaticResource Text_Style}"
+           Grid.ColumnSpan="2"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"
+           Margin="0 15 0 0"/>
+
+        <!--// Кнопка ДА //-->
+
+        <Button Grid.Column="0"
+                Grid.Row="1"
+                >
+            
+        </Button>
+        
+        <Border Grid.Column="0"
+                Grid.Row="1"
+                Background="#FF6464"
+                Opacity="0.85"
+                Width="80"
+                HorizontalAlignment="Left"
+                CornerRadius="0 20 0 20"
+                MouseEnter="YesButtonClick">
+            <TextBlock Text="Да"
+                       Style="{StaticResource Text_Style}"
+                       Margin="0 0 0 0"
+                       HorizontalAlignment="Center"
+                       MouseEnter="YesButtonClick"/>
+        </Border>
+
+        <!--// Кнопка Нет //-->
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Background="#64FF80"
+                Opacity="0.85"
+                Width="80"
+                HorizontalAlignment="Right"
+                CornerRadius="20 0 20 0"
+                MouseEnter="NoButtonClick">
+            <TextBlock Text="Нет"
+                       Style="{StaticResource Text_Style}"
+                       Margin="0 0 0 0"
+                       HorizontalAlignment="Center"
+                       MouseEnter="NoButtonClick"/>
+        </Border>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Window>

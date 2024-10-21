@@ -13,7 +13,7 @@
         <Setter Property="HorizontalAlignment"
                 Value="Left"/>
         <Setter Property="Foreground"
-                Value="#DBDBDB"/>
+                Value="White"/>
         <Setter Property="FontSize"
                 Value="20"/>
         <Setter Property="Margin"

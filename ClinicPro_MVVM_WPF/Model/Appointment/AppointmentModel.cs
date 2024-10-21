@@ -8,8 +8,7 @@ namespace ClinicPro_MVVM_WPF.Model.Appointment
         public int AppointmentId { get; set; }
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan Time { get; set; } // Используем TimeSpan для времени
+        public DateTime DateTime { get; set; }
         public AppointmentStatus Status { get; set; } // "Запланирован", "Выполнен", "Отменен"
         public string? ReasonCancel { get; set; }
 
@@ -20,12 +19,11 @@ namespace ClinicPro_MVVM_WPF.Model.Appointment
 
         public AppointmentModel() { }
 
-        public AppointmentModel(int patientId, int doctorId, DateTime date, TimeSpan time, AppointmentStatus status)
+        public AppointmentModel(int patientId, int doctorId, DateTime date, AppointmentStatus status)
         {
             PatientId = patientId;
             DoctorId = doctorId;
-            Date = date;
-            Time = time;
+            DateTime = date;
             Status = status;
         }
 

@@ -19,9 +19,23 @@ namespace ClinicPro_MVVM_WPF.View.Messages
     /// </summary>
     public partial class ExitMessage : Window
     {
+        public bool isConfirmed { get; private set; } = false;
+
         public ExitMessage()
         {
             InitializeComponent();
         }
+
+        private void YesButtonClick(object sender, RoutedEventArgs e)
+        {
+            isConfirmed = true;
+            this.Close();
+        }
+        private void NoButtonClick(object sender, RoutedEventArgs e)
+        {
+            isConfirmed = false;
+            this.Close();
+        }
+
     }
 }

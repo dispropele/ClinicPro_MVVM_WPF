@@ -19,8 +19,10 @@
     <None Remove="Fonts\JetBrainsMono-Regular.ttf" />
     <None Remove="Resources\Appointment.png" />
     <None Remove="Resources\arrow_back.png" />
+    <None Remove="Resources\background.png" />
     <None Remove="Resources\category.png" />
     <None Remove="Resources\chat_bubble.png" />
+    <None Remove="Resources\exit.png" />
     <None Remove="Resources\Eye off.png" />
     <None Remove="Resources\Eye.png" />
     <None Remove="Resources\Home.png" />
@@ -72,10 +74,16 @@
     <Resource Include="Resources\arrow_back.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\background.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\category.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\chat_bubble.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\exit.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Eye off.png">
@@ -120,6 +128,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\ExitButton.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>

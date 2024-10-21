@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClinicPro_MVVM_WPF.View.Messages;
+
 
 namespace ClinicPro_MVVM_WPF
 {
@@ -24,6 +26,20 @@ namespace ClinicPro_MVVM_WPF
         {
             InitializeComponent();
         }
+        private void HeaderDragMove(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
 
+        private void Exit(object sender, MouseButtonEventArgs e)
+        {
+            ExitMessage exitMessage = new ExitMessage();
+            exitMessage.Show();
+            if (exitMessage.isConfirmed)
+            {
+                this.Close();
+            }
+        }
     }
 }

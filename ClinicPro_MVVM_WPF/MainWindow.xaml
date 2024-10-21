@@ -152,10 +152,28 @@
             <Grid Grid.Column="1">
 
                 <Border Background="#7C92DA"
-                        CornerRadius="00,20,0,0">
-                    
+                        CornerRadius="00,20,0,0"
+                        MouseDown="HeaderDragMove">
+                    <Border Background="#FF4A4A"
+                            Width="80"
+                            HorizontalAlignment="Right"
+                            CornerRadius="0 20 0 0"
+                            MouseDown="Exit"
+                            Cursor="Hand">
+                        <Image Source="/Resources/exit.png"
+                               Height="50"
+                               MouseDown="Exit"
+                               Cursor="Hand"/>
+                    </Border>
                 </Border>
                 
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="1">
+
+                <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}"/>
+
             </Grid>
             
         </Grid>

@@ -1,5 +1,6 @@
 ﻿using ClinicPro_MVVM_WPF.Model.Appointment;
 using ClinicPro_MVVM_WPF.Model.Patient;
+using System.Windows.Threading;
 
 namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
 {
@@ -7,23 +8,49 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
     {
         private readonly AppointmentModel _appointmentModel;
 
+        private DispatcherTimer _timer;
+
         public HomeVM()
         {
             _appointmentModel = new AppointmentModel();
-            AppointmentTime = new TimeSpan(10, 00, 00);
+            AppointmentTime = new DateTime(2024, 10, 22, 10, 00, 00).ToString();
             LastName = "Иванов";
             FirstName = "Иван";
             Patronymic = "Иванович";
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromMinutes(1);
+            _timer.Tick += UpdateDateTime;
+            _timer.Start();
+
+            UpdateDateTime(null, null);
         }
 
-        public TimeSpan AppointmentTime
+
+        public string Appointment
         {
-            get => _appointmentModel.Time; // проверяем на null
+            get
+            {
+                return $"- {AppointmentTime} {LastName} {FirstNameChar}.{PatronymicChar}.";
+            }
+        }
+
+
+        private void UpdateDateTime(object sender, EventArgs e)
+        {
+            CurrentTime = DateTime.Now.ToString("HH:mm");
+            CurrentDate = DateTime.Now.ToString("dd.MM.yyyy");
+            CurrentDayOfWeek = DateTime.Now.ToString("dddd"); // Полное название дня недели
+        }
+
+        public string AppointmentTime
+        {
+            get => _appointmentModel.DateTime.ToString("t");
             set
             {
-                if (_appointmentModel != null)
+                if (_appointmentModel != null && DateTime.TryParse(value, out DateTime parsedTime))
                 {
-                    _appointmentModel.Time = value;
+                    _appointmentModel.DateTime = _appointmentModel.DateTime.Date.Add(parsedTime.TimeOfDay);
                     OnPropertyChanged();
                 }
             }
@@ -58,7 +85,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
         public string FirstNameChar
         {
             get => !string.IsNullOrEmpty(_appointmentModel.Patient.FirstName)
-                    ? _appointmentModel.Patient.FirstName[0].ToString() + "."
+                    ? _appointmentModel.Patient.FirstName[0].ToString()
                     : string.Empty; // проверяем, что имя не пустое
         }
 
@@ -78,8 +105,41 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
         public string PatronymicChar
         {
             get => !string.IsNullOrEmpty(_appointmentModel.Patient.Patronymic)
-                    ? _appointmentModel.Patient.Patronymic[0].ToString() + "."
+                    ? _appointmentModel.Patient.Patronymic[0].ToString()
                     : string.Empty; // проверяем, что отчество не пустое
+        }
+
+        private string _currentTime;
+        public string CurrentTime
+        {
+            get => _currentTime;
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _currentDate;
+        public string CurrentDate
+        {
+            get => _currentDate;
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _currentDayOfWeek;
+        public string CurrentDayOfWeek
+        {
+            get => _currentDayOfWeek;
+            set
+            {
+                _currentDayOfWeek = value;
+                OnPropertyChanged();
+            }
         }
     }
 }
