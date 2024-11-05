@@ -1,112 +1,85 @@
-﻿using ClinicPro_MVVM_WPF.Model.Appointment;
-using ClinicPro_MVVM_WPF.Model.Patient;
+﻿
+
 using System.Windows.Threading;
+using ClinicPro_MVVM_WPF.Model;
+using ClinicPro_MVVM_WPF.Service;
+using ClinicPro_MVVM_WPF.View.Doctor;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
 {
     public class HomeVM : Utils.BaseViewModel
     {
-        private readonly AppointmentModel _appointmentModel;
-
+        private string _appointmentToday;
         private DispatcherTimer _timer;
-
+        private readonly AppointmentService _appointmentService = new AppointmentService();
+        
+        private static int ID = 2;
+        
+        
         public HomeVM()
         {
-            _appointmentModel = new AppointmentModel();
-            AppointmentTime = new DateTime(2024, 10, 22, 10, 00, 00).ToString();
-            LastName = "Иванов";
-            FirstName = "Иван";
-            Patronymic = "Иванович";
-
+            // AppointmentTime = new DateTime(2024, 10, 22, 10, 00, 00).ToString();
+            // LastName = "Иванов";
+            // FirstName = "Иван";
+            // Patronymic = "Иванович";
+            
+            LoadAppointmentTodayAsync();
+            
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromMinutes(1);
             _timer.Tick += UpdateDateTime;
             _timer.Start();
-
-            UpdateDateTime(null, null);
+            
+            UpdateDateTime(null, null); 
+            
         }
-
-
-        public string Appointment
-        {
-            get
-            {
-                return $"- {AppointmentTime} {LastName} {FirstNameChar}.{PatronymicChar}.";
-            }
-        }
-
 
         private void UpdateDateTime(object sender, EventArgs e)
         {
             CurrentTime = DateTime.Now.ToString("HH:mm");
             CurrentDate = DateTime.Now.ToString("dd.MM.yyyy");
             CurrentDayOfWeek = DateTime.Now.ToString("dddd"); // Полное название дня недели
+            OnPropertyChanged();
         }
 
-        public string AppointmentTime
+        private async void LoadAppointmentTodayAsync()
         {
-            get => _appointmentModel.DateTime.ToString("t");
+            AppointmentToday = await GetAppointmentTodayAsync();
+        }
+        
+        public string AppointmentToday
+        {
+            get => _appointmentToday;
             set
             {
-                if (_appointmentModel != null && DateTime.TryParse(value, out DateTime parsedTime))
-                {
-                    _appointmentModel.DateTime = _appointmentModel.DateTime.Date.Add(parsedTime.TimeOfDay);
-                    OnPropertyChanged();
-                }
+                _appointmentToday = value;
+                OnPropertyChanged(nameof(AppointmentToday));
             }
         }
-
-        public string LastName
+        
+        private async Task<string> GetAppointmentTodayAsync()
         {
-            get => _appointmentModel.Patient.LastName; // проверяем на null
-            set
+            // Логика метода получения данных
+            try
             {
-                if (_appointmentModel != null)
+                List<AppointmentModel> appointments = await _appointmentService.getTodayAppointment(2);
+                if (appointments == null || appointments.Count == 0)
                 {
-                    _appointmentModel.Patient.LastName = value;
-                    OnPropertyChanged();
+                    return "Нет записей на сегодня";
                 }
-            }
-        }
 
-        public string FirstName
-        {
-            get => _appointmentModel.Patient.FirstName; // полное имя
-            set
+                AppointmentModel todayAppointment = appointments[0];
+                string todayTime = todayAppointment.dateTime.ToString("t");
+                string todayFio = $"{todayAppointment.patient.lastName} {todayAppointment.patient.firstName[0]}. {todayAppointment.patient.patronymic?[0] ?? '-'}.";
+
+                return todayTime + " " + todayFio;
+            }
+            catch (Exception ex)
             {
-                if (_appointmentModel != null)
-                {
-                    _appointmentModel.Patient.FirstName = value;
-                    OnPropertyChanged();
-                }
+                Console.WriteLine($"Ошибка: {ex.Message}");
+                return "Ошибка при получении данных";
             }
-        }
-
-        public string FirstNameChar
-        {
-            get => !string.IsNullOrEmpty(_appointmentModel.Patient.FirstName)
-                    ? _appointmentModel.Patient.FirstName[0].ToString()
-                    : string.Empty; // проверяем, что имя не пустое
-        }
-
-        public string Patronymic
-        {
-            get => _appointmentModel.Patient.Patronymic ?? string.Empty; // полное отчество
-            set
-            {
-                if (_appointmentModel != null)
-                {
-                    _appointmentModel.Patient.Patronymic = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string PatronymicChar
-        {
-            get => !string.IsNullOrEmpty(_appointmentModel.Patient.Patronymic)
-                    ? _appointmentModel.Patient.Patronymic[0].ToString()
-                    : string.Empty; // проверяем, что отчество не пустое
         }
 
         private string _currentTime;

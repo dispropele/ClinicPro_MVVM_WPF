@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="ClinicPro_MVVM_WPF.View.Doctor.MedCard.MedCardMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
+    <Grid>
+        <!--// Main Grid //-->
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Resources/background.png"
+                            Stretch = "None"/>
+            </Border.Background>
+        </Border>
+        <Border CornerRadius="20"
+                Background="#709DFF"
+                Height="490px"
+                Width="525px"
+                Opacity="0.85"
+                VerticalAlignment="Center">
+
+            <Grid>
+
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    FontFamily="/Fonts/#JetBrains Mono"
+                    Text="Поиск"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="0,101,0,0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center" Height="29" Width="72"/>
+                <Image Source="/Resources/find.png" 
+                       Stretch="None"
+                       Grid.Column="1"
+                       Grid.Row="1"
+                       VerticalAlignment="Top"
+                       Margin="0,30,0,0" Height="101"/>
+
+                <TextBlock
+                    FontSize="24"
+                    Foreground="White"
+                    FontFamily="/Fonts/#JetBrains Mono"
+                    Text="Текущий паицент"
+                    Grid.Row="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center" Height="29" Margin="0,101,0,0" Width="216"/>
+                <Image Source="/Resources/account.png"
+                       Stretch="None"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       VerticalAlignment="Top"
+                       Margin="0,30,0,0" Height="144"/>
+
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

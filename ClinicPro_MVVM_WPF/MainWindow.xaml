@@ -1,9 +1,7 @@
 ﻿<Window x:Class="ClinicPro_MVVM_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClinicPro_MVVM_WPF"
+  
         xmlns:menu="clr-namespace:ClinicPro_MVVM_WPF.Utils"
         xmlns:vm="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor"
         
@@ -149,24 +147,24 @@
             
             <!--// Header //-->
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Row="0" Grid.Column="1">
+
+                
 
                 <Border Background="#7C92DA"
                         CornerRadius="00,20,0,0"
                         MouseDown="HeaderDragMove">
-                    <Border Background="#FF4A4A"
-                            Width="80"
+                    <Button Width="100"
+                            Style="{StaticResource YesExitButtonStyle}"
                             HorizontalAlignment="Right"
-                            CornerRadius="0 20 0 0"
-                            MouseDown="Exit"
-                            Cursor="Hand">
+                            Click="Exit">
                         <Image Source="/Resources/exit.png"
-                               Height="50"
-                               MouseDown="Exit"
-                               Cursor="Hand"/>
-                    </Border>
+                               Height="60"/>
+                    </Button>
                 </Border>
-                
+
+
+
             </Grid>
 
             <Grid Grid.Column="1" Grid.Row="1">

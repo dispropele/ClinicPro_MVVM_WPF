@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClinicPro_MVVM_WPF.View.Messages"
         mc:Ignorable="d" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True"
         Title="ExitMessage" Height="150" Width="250" WindowStartupLocation="CenterOwner">
@@ -31,41 +30,31 @@
 
         <Button Grid.Column="0"
                 Grid.Row="1"
-                >
-            
-        </Button>
-        
-        <Border Grid.Column="0"
-                Grid.Row="1"
-                Background="#FF6464"
-                Opacity="0.85"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource YesExitButtonStyle}"
                 Width="80"
                 HorizontalAlignment="Left"
-                CornerRadius="0 20 0 20"
-                MouseEnter="YesButtonClick">
+                Click="YesButtonClick">
             <TextBlock Text="Да"
                        Style="{StaticResource Text_Style}"
                        Margin="0 0 0 0"
-                       HorizontalAlignment="Center"
-                       MouseEnter="YesButtonClick"/>
-        </Border>
-
+                       HorizontalAlignment="Center"/>
+        </Button>
         <!--// Кнопка Нет //-->
-
-        <Border Grid.Column="1"
+        <Button Grid.Column="1"
                 Grid.Row="1"
-                Background="#64FF80"
-                Opacity="0.85"
+                Style="{StaticResource NoExitButtonStyle}"
                 Width="80"
                 HorizontalAlignment="Right"
-                CornerRadius="20 0 20 0"
-                MouseEnter="NoButtonClick">
+                Click="NoButtonClick">
             <TextBlock Text="Нет"
                        Style="{StaticResource Text_Style}"
                        Margin="0 0 0 0"
-                       HorizontalAlignment="Center"
-                       MouseEnter="NoButtonClick"/>
-        </Border>
+                       HorizontalAlignment="Center"/>
+        </Button>
+
+        
+        
 
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>

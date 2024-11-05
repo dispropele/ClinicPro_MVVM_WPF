@@ -33,8 +33,8 @@
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="383*"/>
-                    <ColumnDefinition Width="143*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Ближайшие приемы:"
@@ -43,16 +43,11 @@
                            Foreground="White"
                            FontFamily="/Fonts/#JetBrains Mono"
                            Margin="20,20,0,0"/>
-                <TextBlock Text="{Binding Appointment}"
+                <TextBlock Grid.Column="0" Text="{Binding AppointmentToday}"
                            Style="{StaticResource Text_Style}"
                            FontSize="24"
                            Margin="35,0,0,0"
                            Grid.Row="1"/>
-                <TextBlock Text="{Binding Appointment}"
-                           Style="{StaticResource Text_Style}"
-                           FontSize="24"
-                           Margin="35,0,0,0"
-                           Grid.Row="2"/>
                 
                 
                 

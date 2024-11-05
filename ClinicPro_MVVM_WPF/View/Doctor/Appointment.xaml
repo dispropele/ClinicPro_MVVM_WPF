@@ -5,8 +5,117 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClinicPro_MVVM_WPF.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="530" d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
     <Grid>
-            
+        <!--// Main Grid //-->
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Resources/background.png"
+                            Stretch = "None"/>
+            </Border.Background>
+        </Border>
+        <Border CornerRadius="20"
+                Background="#709DFF"
+                Height="490px"
+                Width="525px"
+                Opacity="0.85"
+                VerticalAlignment="Center">
+        </Border>
+        <Grid>
+
+            <TextBlock
+                Style="{StaticResource Text_Style}"
+                FontSize="23"
+                FontFamily="/Fonts/#JetBrains Mono"
+                Text="Введите запрос:"
+                Grid.Column="0"
+                Grid.Row="0"
+                Margin="0,70,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center" Height="29" Width="200"/>
+            <TextBlock
+                Style="{StaticResource Text_Style}"
+                FontSize="23"
+                FontFamily="/Fonts/#JetBrains Mono"
+                Text="Результаты поиска:"
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="40,24,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center" Height="29" Width="250"/>
+            <Border CornerRadius="20"
+                Background="White"
+                Height="291"
+                Opacity="1"
+                Grid.Row="1"
+                VerticalAlignment="Top" Margin="58,58,72,0" Grid.ColumnSpan="2"/>
+
+
+            <Border CornerRadius="20"
+                Background="White"
+                Height="35px"
+                Opacity="1"
+                VerticalAlignment="Top" Margin="58,106,264,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <TextBlock
+                Style="{StaticResource Text_Style}"
+                FontSize="23"
+                FontFamily="/Fonts/#JetBrains Mono"
+                Foreground="Black"
+                Text="Иванов Иван"
+                Grid.Row="0"
+                Margin="0,109,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center" Height="29" Width="200" Grid.RowSpan="2"/>
+            <Image Source="/Resources/find.png"
+               Stretch="Fill"
+               Grid.RowSpan="2"     
+               Grid.ColumnSpan="2"
+               VerticalAlignment="Top"
+               Margin="320,109,278,0"
+               Height="25" Width="25"/>
+
+            <TextBlock
+                Style="{StaticResource Text_Style}"
+                FontSize="23"
+                FontFamily="/Fonts/#JetBrains Mono"
+                Text="Критерии"
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="0,70,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center" Height="29" Width="128"/>
+
+            <ListBox ItemsSource="{Binding Diseases}"  SelectedItem="{Binding SelectedDisease}" 
+                     Grid.Column="1" 
+                     Grid.Row="0" 
+                     Margin="74,109,88,392" 
+                     Grid.RowSpan="2"
+                     Height="29" 
+                     Width="128">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" />
+                            <TextBlock Text="{Binding Description}" FontSize="12" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+
+
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
     </Grid>
 </UserControl>
