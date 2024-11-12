@@ -1,13 +1,14 @@
 ﻿<Application x:Class="ClinicPro_MVVM_WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:util="clr-namespace:ClinicPro_MVVM_WPF.Utils"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
+        
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-
+                
                 <ResourceDictionary Source="Styles/Button.xaml"/>
                 <ResourceDictionary Source="Styles/Image.xaml"/>
                 <ResourceDictionary Source="Styles/Page.xaml"/>
@@ -15,11 +16,16 @@
                 <ResourceDictionary Source="Utils/DataTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/YesExitButton.xaml"/>
                 <ResourceDictionary Source="Styles/NoExitButton.xaml"/>
+                <ResourceDictionary Source="Styles/ProgressBar.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonNoHover.xaml"/>
+                <ResourceDictionary Source="Styles/RecordButton.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             
+            <util:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            
         </ResourceDictionary>
         
-        
     </Application.Resources>
+
 </Application>

@@ -1,5 +1,6 @@
 ﻿using ClinicPro_MVVM_WPF.Utils;
 using System.Windows.Input;
+using ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard;
 
 namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
 {
@@ -24,7 +25,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
         public ICommand PharmaCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
         public ICommand AccountCommand { get; set; }
-
+        
         private void Home(object obj) => CurrentView = new HomeVM();
         private void MedCard(object obj) => CurrentView = new MedCardVM();
         private void Appointment(object obj) => CurrentView = new AppointmentVM();
@@ -35,6 +36,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
 
         public NavigationVM()
         {
+            
             HomeCommand = new RelayCommand(Home);
             MedCardCommand = new RelayCommand(MedCard);
             AppointmentCommand = new RelayCommand(Appointment);
@@ -42,7 +44,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
             PharmaCommand = new RelayCommand(Pharma);
             SettingsCommand = new RelayCommand(Settings);
             AccountCommand = new RelayCommand(Account);
-
+            
             CurrentView = new HomeVM();
         }
     }

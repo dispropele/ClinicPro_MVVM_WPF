@@ -1,118 +1,163 @@
-﻿
-
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
+using ClinicPro_MVVM_WPF.Data;
+using ClinicPro_MVVM_WPF.Data.Appointment;
 using ClinicPro_MVVM_WPF.Model;
-using ClinicPro_MVVM_WPF.Service;
-using ClinicPro_MVVM_WPF.View.Doctor;
-using Microsoft.EntityFrameworkCore;
 
 namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
 {
     public class HomeVM : Utils.BaseViewModel
     {
-        private string _appointmentToday;
-        private DispatcherTimer _timer;
-        private readonly AppointmentService _appointmentService = new AppointmentService();
-        
+        // private static ClinicDbContext _context = new ClinicDbContext();
+        // private readonly IAppointmentRepository _appointmentRepository = new AppointmentRepository(_context);
+        private ObservableCollection<AppointmentModel> _todayAppointments;
+
+        private string _appointmentTodayOne;
+        private string _appointmentTodayTwo;
+        private DispatcherTimer _timerAppointment;
         private static int ID = 2;
-        
-        
+
         public HomeVM()
         {
-            // AppointmentTime = new DateTime(2024, 10, 22, 10, 00, 00).ToString();
-            // LastName = "Иванов";
-            // FirstName = "Иван";
-            // Patronymic = "Иванович";
-            
-            LoadAppointmentTodayAsync();
-            
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMinutes(1);
-            _timer.Tick += UpdateDateTime;
-            _timer.Start();
-            
-            UpdateDateTime(null, null); 
-            
+            InitializeTimers(); // Вызов метода инициализации таймеров
+            Task.Run(() => LoadTodayAppointmentsAsync()); // Инициализация данных при загрузке ViewModel
         }
 
-        private void UpdateDateTime(object sender, EventArgs e)
+
+        private void InitializeTimers()
         {
-            CurrentTime = DateTime.Now.ToString("HH:mm");
-            CurrentDate = DateTime.Now.ToString("dd.MM.yyyy");
-            CurrentDayOfWeek = DateTime.Now.ToString("dddd"); // Полное название дня недели
-            OnPropertyChanged();
+            // Инициализация таймера для обновления данных
+            _timerAppointment = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            _timerAppointment.Tick += OnAppointmentTimerTick;
+            _timerAppointment.Start();
         }
 
-        private async void LoadAppointmentTodayAsync()
+        private async void OnAppointmentTimerTick(object sender, EventArgs e)
         {
-            AppointmentToday = await GetAppointmentTodayAsync();
+            await LoadTodayAppointmentsAsync();
         }
-        
-        public string AppointmentToday
+
+
+        // Свойство для отображения информации о записи на сегодня
+        public string AppointmentTodayOne
         {
-            get => _appointmentToday;
+            get => _appointmentTodayOne;
             set
             {
-                _appointmentToday = value;
-                OnPropertyChanged(nameof(AppointmentToday));
+                _appointmentTodayOne = value;
+                OnPropertyChanged(nameof(AppointmentTodayOne));
             }
         }
-        
-        private async Task<string> GetAppointmentTodayAsync()
+
+        public string AppointmentTodayTwo
         {
-            // Логика метода получения данных
-            try
+            get => _appointmentTodayTwo;
+            set
             {
-                List<AppointmentModel> appointments = await _appointmentService.getTodayAppointment(2);
-                if (appointments == null || appointments.Count == 0)
+                _appointmentTodayTwo = value;
+                OnPropertyChanged(nameof(AppointmentTodayTwo));
+            }
+        }
+
+
+        // Метод для обновления строки AppointmentToday
+        private void UpdateAppointmentToday()
+        {
+            if (TodayAppointments != null && TodayAppointments.Any())
+            {
+                var sortedAppointments = TodayAppointments.OrderBy(a => a.DateTime).Take(2).ToList();
+
+                if (sortedAppointments.Count >= 1)
                 {
-                    return "Нет записей на сегодня";
+                    var firstAppointment = sortedAppointments[0];
+                    AppointmentTodayOne = $"{firstAppointment.DateTime:t} {firstAppointment.Patient.LastName} {firstAppointment.Patient.FirstName[0]}. {firstAppointment.Patient.Patronymic[0]}.";
+                }
+                else
+                {
+                    AppointmentTodayOne = "Нет ближайших записей.";
                 }
 
-                AppointmentModel todayAppointment = appointments[0];
-                string todayTime = todayAppointment.dateTime.ToString("t");
-                string todayFio = $"{todayAppointment.patient.lastName} {todayAppointment.patient.firstName[0]}. {todayAppointment.patient.patronymic?[0] ?? '-'}.";
+                if (sortedAppointments.Count == 2)
+                {
+                    var secondAppointment = sortedAppointments[1];
+                    AppointmentTodayTwo = $"{secondAppointment.DateTime:t} {secondAppointment.Patient.LastName} {secondAppointment.Patient.FirstName[0]}. {secondAppointment.Patient.Patronymic[0]}.";
+                }
+                else
+                {
+                    AppointmentTodayTwo = "Нет следующей записи.";
+                }
+            }
+            else
+            {
+                AppointmentTodayOne = "Нет ближайших записей.";
+                AppointmentTodayTwo = string.Empty;
+            }
 
-                return todayTime + " " + todayFio;
+            OnPropertyChanged(nameof(AppointmentTodayOne));
+            OnPropertyChanged(nameof(AppointmentTodayTwo));
+        }
+
+        // Свойство для списка записей
+        public ObservableCollection<AppointmentModel> TodayAppointments
+        {
+            get => _todayAppointments;
+            set
+            {
+                _todayAppointments = value;
+                OnPropertyChanged(nameof(TodayAppointments));
+                OnPropertyChanged(nameof(CountAppointment));
+            }
+        }
+
+        // Асинхронный метод для загрузки записей на сегодня
+        private async Task LoadTodayAppointmentsAsync()
+        {
+            IsLoading = true;
+            try
+            {
+                using (var context = new ClinicDbContext())
+                {
+                    var repository = new AppointmentRepository(context);
+                    var appointments = await repository.GetAppointmentsForDoctorTodayAsync(ID);
+                    TodayAppointments = new ObservableCollection<AppointmentModel>(appointments);
+                    UpdateAppointmentToday();
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                return "Ошибка при получении данных";
+                Console.WriteLine($"Ошибка при загрузке данных: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 
-        private string _currentTime;
-        public string CurrentTime
+        // Используем свойство для автоматического обновления времени
+        public string CurrentTime => DateTime.Now.ToString("HH:mm");
+        public string CurrentDate => DateTime.Now.ToString("dd.MM.yyyy");
+        public string CurrentDayOfWeek => DateTime.Now.ToString("dddd");
+
+        private bool _isLoading;
+        public bool IsLoading
         {
-            get => _currentTime;
+            get => _isLoading;
             set
             {
-                _currentTime = value;
-                OnPropertyChanged();
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
             }
         }
 
-        private string _currentDate;
-        public string CurrentDate
-        {
-            get => _currentDate;
-            set
-            {
-                _currentDate = value;
-                OnPropertyChanged();
-            }
-        }
+        public int CountAppointment => TodayAppointments?.Count ?? 0;
 
-        private string _currentDayOfWeek;
-        public string CurrentDayOfWeek
-        {
-            get => _currentDayOfWeek;
-            set
-            {
-                _currentDayOfWeek = value;
-                OnPropertyChanged();
-            }
-        }
+
+
     }
 }

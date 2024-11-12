@@ -17,14 +17,17 @@
     <None Remove="Fonts\JetBrainsMono-Medium-Italic.ttf" />
     <None Remove="Fonts\JetBrainsMono-Medium.ttf" />
     <None Remove="Fonts\JetBrainsMono-Regular.ttf" />
+    <None Remove="Resources\account.png" />
     <None Remove="Resources\Appointment.png" />
     <None Remove="Resources\arrow_back.png" />
+    <None Remove="Resources\back.png" />
     <None Remove="Resources\background.png" />
     <None Remove="Resources\category.png" />
     <None Remove="Resources\chat_bubble.png" />
     <None Remove="Resources\exit.png" />
     <None Remove="Resources\Eye off.png" />
     <None Remove="Resources\Eye.png" />
+    <None Remove="Resources\find.png" />
     <None Remove="Resources\Home.png" />
     <None Remove="Resources\Log out.png" />
     <None Remove="Resources\logo.png" />
@@ -68,10 +71,16 @@
     <Resource Include="Fonts\JetBrainsMono-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\account.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Appointment.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\arrow_back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\back.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\background.png">
@@ -90,6 +99,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Eye.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\find.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Home.png">

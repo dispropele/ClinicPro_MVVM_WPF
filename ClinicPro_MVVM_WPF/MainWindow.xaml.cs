@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClinicPro_MVVM_WPF.View.Messages;
 using ClinicPro_MVVM_WPF.Model;
+using ClinicPro_MVVM_WPF.View.Doctor.MedCard;
+using ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard;
 
 
 namespace ClinicPro_MVVM_WPF
@@ -34,7 +36,7 @@ namespace ClinicPro_MVVM_WPF
         private void HeaderDragMove(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+                DragMove();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -44,14 +46,14 @@ namespace ClinicPro_MVVM_WPF
             exitMessage.Owner = this;
 
             // Вычисляем положение окна выхода
-            double ownerCenterX = this.Left + this.Width / 2;
-            double ownerCenterY = this.Top + this.Height / 2;
+            double ownerCenterX = Left + Width / 2;
+            double ownerCenterY = Top + Height / 2;
             exitMessage.Left = ownerCenterX - exitMessage.Width / 2;
             exitMessage.Top = ownerCenterY - exitMessage.Height / 2;
             
             if (exitMessage.ShowDialog() == true)
             {
-                this.Close();
+                Close();
             }
         }
     }

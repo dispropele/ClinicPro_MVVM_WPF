@@ -1,29 +1,58 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ClinicPro_MVVM_WPF.Model
 {
     public class DoctorModel
     {
-
-        public int doctorId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("doctor_id")]
+        public int DoctorId { get; set; }
         
-        public string firstName { get; set; } = string.Empty;
-
-        public string lastName { get; set; } = string.Empty;
+        [Required]
+        [StringLength(30)]
+        [Column("first_name")]
+        public string FirstName { get; set; } = string.Empty;
         
-        public string? patronymic { get; set; }
+        [Required]
+        [StringLength(30)]
+        [Column("last_name")]
+        public string LastName { get; set; } = string.Empty;
         
-        public string? officeNumber { get; set; }
+        [StringLength(30)]
+        [Column("patronymic")]
+        public string? Patronymic { get; set; }
         
-        public char gender { get; set; }
+        [StringLength(5)]
+        [Column("office_number")]
+        public string? OfficeNumber { get; set; }
         
-        public string? email { get; set; }
+        [Required]
+        [Column("gender")]
+        public char Gender { get; set; }
         
-        public string? phoneNumber { get; set; }
+        [EmailAddress]
+        [Column("email")]
+        public string? Email { get; set; }
         
-        public byte[]? photo { get; set; } // Для хранения изображения
+        [Phone]
+        [Column("phone_number")]
+        public string? PhoneNumber { get; set; }
         
-        public string hashPassword { get; set; } = string.Empty;
+        [Column("photo")]
+        public byte[]? Photo { get; set; } // Для хранения изображения
         
-        public virtual SpecializationModel specialization { get; set; }
+        [Required]
+        [Column("hash_password")]
+        public string HashPassword { get; set; } = string.Empty;
+        
+        [Required]
+        [Column("specializ_id")]
+        [ForeignKey("Specialization")]
+        public int SpecializId { get; set; }
+        
+        public virtual SpecializationModel Specialization { get; set; }
     }
 }

@@ -15,18 +15,18 @@ namespace ClinicPro_MVVM_WPF.View.Messages
 
         private void YesButtonClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
         }
         private void NoButtonClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         private void ExitMessage_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.DialogResult == true)
+            if (DialogResult == true)
             {
-                this.DialogResult = false;
+                DialogResult = false;
             }
         }
         

@@ -2,15 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor"
                     xmlns:view="clr-namespace:ClinicPro_MVVM_WPF.View.Doctor"
-                    xmlns:viewMedCard="clr-namespace:ClinicPro_MVVM_WPF.View.Doctor.MedCard">
+                    xmlns:viewMedCard="clr-namespace:ClinicPro_MVVM_WPF.View.Doctor.MedCard"
+                    xmlns:medCard="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard">
 
     <DataTemplate DataType="{x:Type vm:HomeVM}">
         <view:Home/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:MedCardVM}">
-        <viewMedCard:MedCardMenu/>
-    </DataTemplate>
+    
     
     <DataTemplate DataType="{x:Type vm:AppointmentVM}">
         <view:Appointment/>
@@ -31,5 +30,25 @@
     <DataTemplate DataType="{x:Type vm:AccountVM}">
         <view:Account/>
     </DataTemplate>
-
+    
+    
+    
+    <!-- MedCard -->
+    
+    <DataTemplate DataType="{x:Type medCard:MedCardVM}">
+        <viewMedCard:MedCard/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type medCard:MedCardMenuVM}">
+        <viewMedCard:MedCardMenu/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type medCard:MedCardSearchVM}">
+        <viewMedCard:MedCardSearch/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type medCard:MedCardInfoVM}">
+        <viewMedCard:MedCardInfo/>
+    </DataTemplate>
+    
 </ResourceDictionary>

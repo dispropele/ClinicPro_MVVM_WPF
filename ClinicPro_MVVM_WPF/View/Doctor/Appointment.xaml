@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClinicPro_MVVM_WPF.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="530" d:DesignWidth="622"
-             Style="{StaticResource Page_Style}">
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             Style="{StaticResource Page_Style}"
+             Height="490"
+             Width="525">
     <Grid>
         <!--// Main Grid //-->
         <Border>
@@ -19,98 +20,78 @@
                 Background="#709DFF"
                 Height="490px"
                 Width="525px"
-                Opacity="0.85"
-                VerticalAlignment="Center">
+                Opacity="0.85">
         </Border>
         <Grid>
 
-            <TextBlock
-                Style="{StaticResource Text_Style}"
-                FontSize="23"
-                FontFamily="/Fonts/#JetBrains Mono"
-                Text="Введите запрос:"
-                Grid.Column="0"
-                Grid.Row="0"
-                Margin="0,70,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center" Height="29" Width="200"/>
-            <TextBlock
-                Style="{StaticResource Text_Style}"
-                FontSize="23"
-                FontFamily="/Fonts/#JetBrains Mono"
-                Text="Результаты поиска:"
-                Grid.Column="0"
-                Grid.Row="1"
-                Margin="40,24,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center" Height="29" Width="250"/>
-            <Border CornerRadius="20"
-                Background="White"
-                Height="291"
-                Opacity="1"
-                Grid.Row="1"
-                VerticalAlignment="Top" Margin="58,58,72,0" Grid.ColumnSpan="2"/>
+            <Grid x:Name="Search"
+                  HorizontalAlignment="Left"
+                  Margin="20 0 0 0">
 
+                <TextBlock  Style="{StaticResource Text_Style}"
+                            FontSize="22"
+                            Margin="0 0 0 50"
+                            Text="Введите запрос:"/>
 
-            <Border CornerRadius="20"
-                Background="White"
-                Height="35px"
-                Opacity="1"
-                VerticalAlignment="Top" Margin="58,106,264,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-            <TextBlock
-                Style="{StaticResource Text_Style}"
-                FontSize="23"
-                FontFamily="/Fonts/#JetBrains Mono"
-                Foreground="Black"
-                Text="Иванов Иван"
-                Grid.Row="0"
-                Margin="0,109,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center" Height="29" Width="200" Grid.RowSpan="2"/>
-            <Image Source="/Resources/find.png"
-               Stretch="Fill"
-               Grid.RowSpan="2"     
-               Grid.ColumnSpan="2"
-               VerticalAlignment="Top"
-               Margin="320,109,278,0"
-               Height="25" Width="25"/>
+                <TextBox Height="45px"
+                         Width="300px"
+                         Grid.ColumnSpan="2"
+                         VerticalAlignment="Bottom"
+                         FontSize="24"
+                         Foreground="Black"
+                         Margin="0 0 0 15"
+                         Padding="15 4 0 0">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius"
+                                    Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
-            <TextBlock
-                Style="{StaticResource Text_Style}"
-                FontSize="23"
-                FontFamily="/Fonts/#JetBrains Mono"
-                Text="Критерии"
-                Grid.Column="1"
-                Grid.Row="0"
-                Margin="0,70,0,0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center" Height="29" Width="128"/>
+                <Image Source="/Resources/find.png"
+                       Stretch="Fill"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Right"
+                       Margin="0 0 10 25"
+                       Height="25" Width="25"/>
 
-            <ListBox ItemsSource="{Binding Diseases}"  SelectedItem="{Binding SelectedDisease}" 
-                     Grid.Column="1" 
-                     Grid.Row="0" 
-                     Margin="74,109,88,392" 
-                     Grid.RowSpan="2"
-                     Height="29" 
-                     Width="128">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" />
-                            <TextBlock Text="{Binding Description}" FontSize="12" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            </Grid>
 
+            <Grid x:Name="Filter"
+                  Grid.Column="1">
 
+                <TextBlock Style="{StaticResource Text_Style}"
+                           FontSize="22"
+                           Text="Критерии:"
+                           Margin="0 0 0 50"/>
 
+                <Border Height="47"
+                        Width="160"
+                        CornerRadius="10"
+                        Margin="0 55 0 0"
+                        Background="#ebebeb">
 
+                    <ComboBox FontSize="20"
+                              Height="45"
+                              Width="150"
+                              FontFamily="/Fonts/#JetBrains Mono"
+                              Foreground="#494949"
+                              Padding="10 9 0 0"
+                              Background="White"
+                              BorderBrush="#ebebeb"
+                              BorderThickness="0">
+                        <ComboBoxItem>Фамилия</ComboBoxItem>
+                        <ComboBoxItem>Дата рождения</ComboBoxItem>
+                    </ComboBox>
 
+                </Border>
+
+            </Grid>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="160"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="130"/>

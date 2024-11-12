@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor"
+             xmlns:load="clr-namespace:ClinicPro_MVVM_WPF.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="622"
              Style="{StaticResource Page_Style}">
@@ -12,10 +13,9 @@
         <vm:HomeVM/>
     </UserControl.DataContext>
 
+    <Grid x:Name="Main">
 
-    <Grid>
-
-        <Border CornerRadius="0,20,20,0" Grid.RowSpan="2">
+        <Border CornerRadius="0,20,20,0" Grid.Row="0" Grid.RowSpan="2">
             <Border.Background>
                 <ImageBrush ImageSource="/Resources/background.png"
                             Stretch = "None"/>
@@ -43,14 +43,31 @@
                            Foreground="White"
                            FontFamily="/Fonts/#JetBrains Mono"
                            Margin="20,20,0,0"/>
-                <TextBlock Grid.Column="0" Text="{Binding AppointmentToday}"
+                <TextBlock Grid.Column="0" Text="{Binding AppointmentTodayOne}"
                            Style="{StaticResource Text_Style}"
                            FontSize="24"
                            Margin="35,0,0,0"
                            Grid.Row="1"/>
-                
-                
-                
+                <TextBlock Grid.Column="0" Text="{Binding AppointmentTodayTwo}"
+                           Style="{StaticResource Text_Style}"
+                           FontSize="24"
+                           Margin="35,0,0,0"
+                           Grid.Row="2"/>
+
+                <TextBlock Grid.Row="4"
+                           Text="Кол-во записей на сегодня:"
+                           Style="{StaticResource Text_Style}"
+                           FontSize="24"
+                           HorizontalAlignment="Left"
+                           Margin="20 0 0 0"/>
+
+                <TextBlock Grid.Row="4"
+                           Text="{Binding CountAppointment}"
+                           FontSize="24"
+                           Style="{StaticResource Text_Style}"
+                           HorizontalAlignment="Right"
+                           Margin="0 0 90 0"/>
+
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -102,6 +119,12 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
         </Grid>
+
+        <!-- Анимация загрузки -->
+        <load:Loading Grid.RowSpan="2"
+                      Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="360px"/>

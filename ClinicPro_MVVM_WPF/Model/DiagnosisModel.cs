@@ -1,15 +1,28 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ClinicPro_MVVM_WPF.Model
 {
     public class DiagnosisModel
     {
-        public int diagnosisId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("diagnosis_id")]
+        public int DiagnosisId { get; set; }
         
-        public string code { get; set; } // Код диагноза (например, МКБ-10)
+        [Required]
+        [Column("code")]
+        public string Code { get; set; } // Код диагноза (например, МКБ-10)
         
-        public string name { get; set; }
+        [Required]
+        [Column("name")]
+        public string Name { get; set; }
         
-        public string description { get; set; }
+        [Required]
+        [Column("description")]
+        public string Description { get; set; }
+        
         
     }
 }

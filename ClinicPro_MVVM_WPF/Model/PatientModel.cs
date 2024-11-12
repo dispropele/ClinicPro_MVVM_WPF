@@ -1,28 +1,57 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ClinicPro_MVVM_WPF.Model
 {
+    
     public class PatientModel
     {
-
-        public int patientId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("patient_id")]
+        public int PatientId { get; set; }
         
-        public string polisNumber { get; set; } = string.Empty;
+        [Required]
+        [StringLength(50)]
+        [Column("polis_number")]
+        public string PolisNumber { get; set; } = string.Empty;
         
-        public string firstName { get; set; } = string.Empty;
+        [Required]
+        [StringLength(50)]
+        [Column("first_name")]
+        public string FirstName { get; set; } = string.Empty;
         
-        public string lastName { get; set; } = string.Empty;
+        [Required]
+        [StringLength(50)]
+        [Column("last_name")]
+        public string LastName { get; set; } = string.Empty;
         
-        public string? patronymic { get; set; }
-
-        public DateTime? dateOfBirth { get; set; }
+        [StringLength(50)]
+        [Column("patronymic")]
+        public string? Patronymic { get; set; }
         
-        public char gender { get; set; } // "M" или "F"
+        [Column("date_of_birth")]
+        public DateTime? DateOfBirth { get; set; }
         
-        public string? phoneNumber { get; set; }
-
-        public string? email { get; set; }
+        [Required]
+        [StringLength(1)]
+        [Column("gender")]
+        public char Gender { get; set; } // "M" или "F"
         
-        public string hashPassword { get; set; }  = string.Empty;
+        [Phone]
+        [StringLength(15)]
+        [Column("phone_number")]
+        public string? PhoneNumber { get; set; }
+        
+        [EmailAddress]
+        [StringLength(100)]
+        [Column("email")]
+        public string? Email { get; set; }
+        
+        [Required]
+        [Column("hash_password")]
+        public string HashPassword { get; set; }  = string.Empty;
         
         
     }

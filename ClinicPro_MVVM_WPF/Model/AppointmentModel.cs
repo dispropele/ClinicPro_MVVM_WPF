@@ -1,24 +1,40 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ClinicPro_MVVM_WPF.Model
 {
     public class AppointmentModel
     {
-
-        public int appointmentId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("appointment_id")]
+        public int AppointmentId { get; set; }
         
-        public int patientId { get; set; }
+        [Required]
+        [ForeignKey("Patient")]
+        [Column("patient_id")]
+        public int PatientId { get; set; }
         
-        public int doctorId { get; set; }
+        [Required]
+        [ForeignKey("Doctor")]
+        [Column("doctor_id")]
+        public int DoctorId { get; set; }
         
-        public DateTime dateTime { get; set; }
+        [Required]
+        [Column("date_time")]
+        public DateTime DateTime { get; set; }
         
-        public string status { get; set; } // "Запланирован", "Выполнен", "Отменен"
+        [Required]
+        [Column("status")]
+        public string Status { get; set; } // "Запланирован", "Выполнен", "Отменен"
+        
+        [Column("reason_cancel")]
+        public string? ReasonCancel { get; set; }
 
-        public string? reasonCancel { get; set; }
 
-
-        public virtual PatientModel patient { get; set; } = null!; // Навигационное свойство для пациента
-        public virtual DoctorModel doctor { get; set; } = null!; // Навигационное свойство для врача
+        public virtual PatientModel Patient { get; set; } = null!; // Навигационное свойство для пациента
+        public virtual DoctorModel Doctor { get; set; } = null!; // Навигационное свойство для врача
 
     }
 }

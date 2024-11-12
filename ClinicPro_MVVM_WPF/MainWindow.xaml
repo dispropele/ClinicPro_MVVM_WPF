@@ -166,13 +166,11 @@
 
 
             </Grid>
-
-            <Grid Grid.Column="1" Grid.Row="1">
-
-                <ContentControl x:Name="Pages"
-                                Content="{Binding CurrentView}"/>
-
-            </Grid>
+            
+            <ContentControl x:Name="Pages"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Content="{Binding CurrentView}"/>
             
         </Grid>
 
