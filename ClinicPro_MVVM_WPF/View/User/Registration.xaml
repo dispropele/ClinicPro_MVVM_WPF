@@ -1,0 +1,278 @@
+﻿<UserControl x:Class="ClinicPro_MVVM_WPF.View.User.Registration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClinicPro_MVVM_WPF.View.User"
+             xmlns:utils="clr-namespace:ClinicPro_MVVM_WPF.Utils"
+             Background="Transparent"
+             MouseDown="UserControl_MouseDown"
+             Height="600" Width="800">
+    <Grid>
+        
+        <Button Grid.RowSpan="2"
+            HorizontalAlignment="Right"
+            Style="{StaticResource ButtonNoHoverStyle}"
+            Width="100"
+            Height="100"
+            VerticalAlignment="Bottom"
+            Command="{Binding LoginCommand}">
+            <Image Source="/Resources/back.png"
+                   Width="55"/>
+        </Button>
+        
+        <Image HorizontalAlignment="Left"
+                Width="60"
+               Source="/Resources/LogoNoBg.png"
+                Margin="20 12 0 0"/>
+        <TextBlock
+            Grid.Row="0"
+            Style="{StaticResource Text_Style}"
+            FontSize="24"
+            Text="ClinicPro"
+            Margin="100 10 0 0"/>
+        
+        <Image Source="/Resources/account.png"
+               Grid.Row="1"
+               Grid.RowSpan="2"
+               Width="100"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Margin="80 30 0 0"/>
+        <TextBlock
+            Grid.Row="3"
+            Style="{StaticResource Text_Style}"
+            FontSize="30"
+            Text="Patient"
+            Margin="65 0 0 20"/>
+        
+        <TextBlock
+            Text="Логин"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="1"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 200 0 "/>
+        
+        <TextBlock Grid.Row="1"
+                   HorizontalAlignment="Right"
+                   Margin="0 50 200 0"
+                   Style="{StaticResource Text_Style}"
+                   Foreground="Red"
+                   FontSize="14"
+                   Text="{Binding Errors[Username]}"/>
+        
+        <!--// Login //-->
+        <TextBox Grid.Row="1"
+                 Style="{StaticResource TextBoxUnderlineStyle}"
+                 Margin="170 0 0 0"
+                 Padding="0 12 0 0"
+                 VerticalAlignment="Bottom"
+                 Text="{Binding Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TextBlock
+            Text="Имя"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="2"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 190 0 "/>
+        
+        <TextBlock Grid.Row="2"
+                   HorizontalAlignment="Right"
+                   Margin="0 0 200 0"
+                   Style="{StaticResource Text_Style}"
+                   Foreground="Red"
+                   FontSize="14"
+                   Text="{Binding Errors[FirstName]}"/>
+        
+        <!--// Name //-->
+        <TextBox Grid.Row="2"
+                 Style="{StaticResource TextBoxUnderlineStyle}"
+                 Margin="170 0 0 0"
+                 Padding="0 12 0 0"
+                 VerticalAlignment="Bottom"
+                 Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TextBlock
+            Text="Фамилия"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="3"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 230 0 "/>
+        
+        <TextBlock Grid.Row="3"
+                   HorizontalAlignment="Right"
+                   Margin="0 0 200 0"
+                   Style="{StaticResource Text_Style}"
+                   Foreground="Red"
+                   FontSize="14"
+                   Text="{Binding Errors[LastName]}"/>
+        
+        <!--// Last name //-->
+        <TextBox Grid.Row="3"
+                 Style="{StaticResource TextBoxUnderlineStyle}"
+                 Margin="170 0 0 0"
+                 Padding="0 12 0 0"
+                 VerticalAlignment="Bottom"
+                 Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TextBlock
+            Text="Пол"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="4"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 178 0 "/>
+        <!--// Gender //-->
+        <StackPanel Grid.Row="4"
+                    Grid.RowSpan="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="200 0 0 20"
+                    Orientation="Horizontal">
+            <RadioButton Style="{StaticResource CustomRadioButtonStyle}"
+                         Margin="0 0 20 0"
+                         IsChecked="{Binding IsMale}">
+                <Image Source="/Resources/male.png"
+                       Width="25"/>
+            </RadioButton>
+            
+            <TextBlock Text="Male"
+                       Foreground="#FFFFFF"
+                       FontSize="24"
+                       Opacity="0.5"
+                       Style="{StaticResource Text_Style}"
+                       Margin="0 0 2 0"/>
+            
+            <RadioButton Style="{StaticResource CustomRadioButtonStyle}"
+                         Margin="20 0 0 0"
+                         IsChecked="{Binding IsFemale}">
+                <Image Source="/Resources/female.png"
+                       Width="25"/>
+            </RadioButton>
+            
+            <TextBlock Text="Female"
+                       Foreground="#FFFFFF"
+                       FontSize="24"
+                       Opacity="0.5"
+                       Style="{StaticResource Text_Style}"
+                       Margin="20 0 0 0"/>
+            
+        </StackPanel>
+        <TextBlock
+            Text="Полис"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="5"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 190 0 "/>
+        
+        <TextBlock Grid.Row="5"
+                   HorizontalAlignment="Right"
+                   Margin="0 0 200 0"
+                   Style="{StaticResource Text_Style}"
+                   Foreground="Red"
+                   FontSize="14"
+                   Text="{Binding Errors[PolicyNumber]}"/>
+        
+        <!--// Polis //-->
+        <TextBox Grid.Row="5"
+                 Style="{StaticResource TextBoxUnderlineStyle}"
+                 Margin="170 0 0 0"
+                 Padding="0 12 0 0"
+                 MaxLength="16"
+                 VerticalAlignment="Bottom"
+                 Text="{Binding PolicyNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TextBlock
+            Text="Пароль"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="6"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 200 0 "/>
+        
+        <TextBlock Grid.Row="6"
+                   HorizontalAlignment="Right"
+                   Margin="0 0 200 0"
+                   Style="{StaticResource Text_Style}"
+                   Foreground="Red"
+                   FontSize="14"
+                   Text="{Binding Errors[Password]}"/>
+        
+        <!--// Password //-->
+        <PasswordBox Grid.Row="6"
+                 Style="{StaticResource PasswordBoxStyle}"
+                 Margin="170 0 0 0"
+                 Padding="0 12 0 0"
+                 VerticalAlignment="Bottom"
+                 utils:PasswordBoxHelper.BoundPassword="{Binding Password,
+                  UpdateSourceTrigger=PropertyChanged,
+                  ValidatesOnDataErrors=True,
+                  ValidatesOnExceptions=True}"/>
+        
+        <TextBlock
+            Text="Подтвердите пароль"
+            Style="{StaticResource Text_Style}"
+            Grid.Row="7"
+            VerticalAlignment="Bottom"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0 0 350 0 "/>
+        
+        <TextBlock Grid.Row="7"
+                   HorizontalAlignment="Right"
+                   Margin="0 0 200 0"
+                   Style="{StaticResource Text_Style}"
+                   Foreground="Red"
+                   FontSize="14"
+                   Text="{Binding Errors[ConfirmPassword]}"/>
+        
+        <!--// Confirm Password //-->
+        <PasswordBox Grid.Row="7"
+                     Style="{StaticResource PasswordBoxStyle}"
+                     Margin="170 0 0 0"
+                     Padding="0 12 0 0"
+                     VerticalAlignment="Bottom"
+                     utils:PasswordBoxHelper.BoundPassword="{Binding ConfirmPassword,
+                      UpdateSourceTrigger=PropertyChanged,
+                      ValidatesOnDataErrors=True,
+                      ValidatesOnExceptions=True}"/>
+        
+        <Button Grid.Row="8"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="#3ABD4D"
+                Style="{StaticResource RecordButtonStyle}"
+                Width="200"
+                Height="50"
+                Margin="150 10 0 0"
+                Command="{Binding RegisterCommand}">
+            <TextBlock Text="Регистрация"
+                       Style="{StaticResource Text_Style}"
+                       Margin="0 0 0 0"/>
+        </Button>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="102"/>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="62"/>
+            <RowDefinition Height="81"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+    </Grid>
+</UserControl>

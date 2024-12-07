@@ -1,0 +1,258 @@
+﻿<UserControl x:Class="ClinicPro_MVVM_WPF.View.Doctor.MedCard.MedCardInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:med="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard"
+             xmlns:utils="clr-namespace:ClinicPro_MVVM_WPF.Utils"
+             Height="490"
+             Width="525"
+             Style="{StaticResource Page_Style}">
+    
+    <Grid>
+        <!--// Main Grid //-->
+        
+        <Border CornerRadius="20"
+                Background="#709DFF"
+                Height="490px"
+                Width="525px"
+                Opacity="0.85"
+                VerticalAlignment="Center">
+            <Grid>
+                <Border CornerRadius="20 20 0 0"
+                        Background="#344B94"
+                        Height="60px"
+                        Width="525px"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Top"/>
+
+                <Button Style="{StaticResource ButtonNoHoverStyle}"
+                        Grid.Column="1"
+                        Height="60"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Width="80"
+                        Command="{Binding ShowMenuMedCardCommand}">
+                    <Image Source="/Resources/back.png"
+                           Width="46"/>
+                </Button>
+                
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    Text="Медкарта"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="2"
+                    Margin="0 15 0 0"/>
+
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    Text="ФИО:"
+                    Margin="30 70 0 0"/>
+                
+                <!--// FIO //-->
+                
+                <Border
+                    BorderThickness="0 0 0 1"
+                    BorderBrush="White"
+                    Width="300px"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 30 15"
+                    Grid.ColumnSpan="2">
+
+                    <TextBlock Style="{StaticResource Text_Style}"
+                               Text="{Binding MedCardFio, FallbackValue=Нет данных}"
+                               Margin="0 0 0 0"/>
+
+                </Border>
+                
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    Text="Пол:"
+                    Grid.Row="1"
+                    VerticalAlignment="Top"
+                    Margin="30,0,0,0"/>
+                
+                <!--// Gender //-->
+                
+                <Border
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="White"
+                        Width="50px"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 40 0"
+                        Grid.Row="1">
+
+                    <TextBlock Style="{StaticResource Text_Style}"
+                               Text="{Binding Gender}"
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Center"/>
+
+                </Border>
+                
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    Text="Дата рождения:"
+                    VerticalAlignment="Top"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Center"
+                    Grid.Row="1" Grid.ColumnSpan="2"/>
+                
+                <!--// DateOfBirth //-->
+                
+                <Border
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="White"
+                        Width="120px"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0 2 20 0"
+                        Grid.Row="1"
+                        Grid.Column="1">
+
+                    <TextBlock Style="{StaticResource Text_Style}"
+                               Text="{Binding DateOfBirth}"
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Center"/>
+
+                </Border>
+                
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    Text="Телефон:"
+                    Grid.Row="1"
+                    Margin="30,0,0,0" />
+    
+                <!--// Phone //-->
+                
+                <Border
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="White"
+                        Width="200px"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="0 2 20 0"
+                        Padding="0 0 0 2"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2">
+
+                    <TextBlock Style="{StaticResource Text_Style}"
+                               Text="{Binding PhoneNumber}"
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Center"/>
+
+                </Border>
+
+                <TextBlock
+                    Style="{StaticResource Text_Style}"
+                    FontSize="24"
+                    Text="Адрес:"
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom"
+                    Margin="30,0,0,5"/>
+                
+                <!--// Adress //-->
+
+                <Border
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="White"
+                        Width="350px"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 50 5"
+                        Padding="0 0 0 2"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2">
+
+                    <TextBlock Style="{StaticResource Text_Style}"
+                               Text="{Binding EmailAddress}"
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Center"/>
+
+                </Border>
+
+                <!--// Polis //-->
+                
+                <TextBlock
+                    FontSize="24"
+                    Style="{StaticResource Text_Style}"
+                    Text="Номер полиса:"
+                    Grid.Row="2"
+                    Margin="30,0,0,0"/>
+
+                <Border
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="White"
+                        Width="250px"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 50 0"
+                        Padding="0 0 0 2"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2">
+
+                    <TextBlock Style="{StaticResource Text_Style}"
+                               Text="{Binding PolisNumber}"
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Center"
+                               />
+
+                </Border>
+                
+                <!--// Record Buttons //-->
+                
+                <Button Style="{StaticResource RecordButtonStyle}"
+                        Height="60px"
+                        Width="260"
+                        VerticalAlignment="Center"
+                        Grid.Row="3"
+                        Command="{Binding ViewRecordMedCardCommand}">
+                    <TextBlock
+                        Style="{StaticResource Text_Style}"
+                        TextDecorations="Underline"
+                        Text="Посмотреть записи"
+                        Margin="0,0,0,0"/>
+                </Button>
+                <Button Style="{StaticResource RecordButtonStyle}"
+                        Height="60"
+                        Width="215"
+                        VerticalAlignment="Center"
+                        Command="{Binding CreateRecordCommand}"
+                        Grid.Row="3"
+                        Grid.Column="1">
+                    <TextBlock  Style="{StaticResource Text_Style}"
+                                TextDecorations="Underline"
+                                Text="Создать запись"
+                                Margin="0,0,0,0"/>
+                </Button>
+
+
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+            </Grid>
+            
+        </Border>
+        <!-- Анимация загрузки -->
+        <utils:Loading Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+    </Grid>
+    
+</UserControl>

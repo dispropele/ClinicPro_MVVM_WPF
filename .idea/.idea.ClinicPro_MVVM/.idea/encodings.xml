@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="windows-1251" addBOMForNewFiles="with BOM">
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/Data/ClinicDbContext.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/Styles/ComboBox.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/Styles/DatePicker.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/Styles/PassBox.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/Utils/Lang/Lang-ru.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Admin/AccountView.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Admin/Doctors/AddDoctorView.xaml" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Admin/Doctors/DoctorsView.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Admin/Doctors/EditDoctorData.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Admin/Doctors/ResetPasswordDoctor.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Admin/Doctors/ViewDoctorData.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/AdminView.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/DoctorView.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Patient/Account/AccountParent.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Patient/Home/CreateAppointment/ChoiceDoctors.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Patient/Home/CreateAppointment/ChoiceTime.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Patient/Home/CreateAppointment/TimePicker.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/Patient/Home/HomeView.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/PatientView.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/User/ForgotPassword.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/View/User/ResetPassword.xaml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/ViewModel/Patient/Appointment/AppointmentParentVM.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClinicPro_MVVM_WPF/ViewModel/Patient/Home/CreateAppointment/ChoiceDoctorsVM.cs" charset="windows-1251" />
+  </component>
+</project>
