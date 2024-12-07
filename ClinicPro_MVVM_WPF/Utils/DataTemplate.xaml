@@ -1,43 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor"
-                    xmlns:view="clr-namespace:ClinicPro_MVVM_WPF.View.Doctor"
+                    
+                    xmlns:patientvm="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Patient"
+                    xmlns:patientview="clr-namespace:ClinicPro_MVVM_WPF.View.Patient"
+                    
+                    xmlns:doctorview="clr-namespace:ClinicPro_MVVM_WPF.View.Doctor"
                     xmlns:viewMedCard="clr-namespace:ClinicPro_MVVM_WPF.View.Doctor.MedCard"
-                    xmlns:medCard="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard">
-
-    <DataTemplate DataType="{x:Type vm:HomeVM}">
-        <view:Home/>
-    </DataTemplate>
-
-    
-    
-    <DataTemplate DataType="{x:Type vm:AppointmentVM}">
-        <view:Appointment/>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:PharmaVM}">
-        <view:Pharma/>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:ChatVM}">
-        <view:Chat/>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:SettingsVM}">
-        <view:Settings/>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:AccountVM}">
-        <view:Account/>
-    </DataTemplate>
-    
-    
+                    xmlns:medCard="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard"
+                    
+                    xmlns:UserControl="clr-namespace:ClinicPro_MVVM_WPF.ViewModel"
+                    xmlns:user="clr-namespace:ClinicPro_MVVM_WPF.View.User"
+                    
+                    xmlns:utils="clr-namespace:ClinicPro_MVVM_WPF.Utils"
+                    xmlns:view="clr-namespace:ClinicPro_MVVM_WPF.View">
     
     <!-- MedCard -->
     
-    <DataTemplate DataType="{x:Type medCard:MedCardVM}">
-        <viewMedCard:MedCard/>
-    </DataTemplate>
+   
     
     <DataTemplate DataType="{x:Type medCard:MedCardMenuVM}">
         <viewMedCard:MedCardMenu/>
@@ -50,5 +30,18 @@
     <DataTemplate DataType="{x:Type medCard:MedCardInfoVM}">
         <viewMedCard:MedCardInfo/>
     </DataTemplate>
+    
+    <!-- Login -->
+    
+    <DataTemplate DataType="{x:Type UserControl:LoginVM}">
+        <user:Login/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type UserControl:RegistrationVM}">
+        <user:Registration/>
+    </DataTemplate>
+    
+    <!--// Patient //-->
+    
     
 </ResourceDictionary>

@@ -35,12 +35,27 @@ public class AppointmentRepository : IAppointmentRepository
                 .Where(a => a.DoctorId == doctorId)
                 .ToListAsync();
         }
-
+        
+        public async Task<int> GetAppointmentCountByDoctor(int doctorId)
+        {
+            return await _context.Appointment
+                .CountAsync(a => a.DoctorId == doctorId);
+        }
+        
         public async Task<IEnumerable<AppointmentModel>> GetAppointmentsByPatientIdAsync(int patientId)
         {
             return await _context.Appointment
                 .Include(a => a.Doctor)
                 .Where(a => a.PatientId == patientId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AppointmentModel>> GetAppointmentsByPatientIdInScheduledAsync(int patientId)
+        {
+            return await _context.Appointment
+                .Include(a => a.Doctor)
+                .Include(a => a.Doctor.Specialization)
+                .Where(a => a.PatientId == patientId && a.Status == "Scheduled")
                 .ToListAsync();
         }
         
@@ -51,6 +66,26 @@ public class AppointmentRepository : IAppointmentRepository
                 .Include(a => a.Patient)
                 .Include(a => a.Doctor)
                 .Where(a => a.DoctorId == doctorId && a.DateTime.Date == today)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AppointmentModel>> GetAppointmentsForPatientTodayAsync(DateTime? dateTime)
+        {
+            return await _context.Appointment
+                .Include(a => a.Patient)
+                .Include(a => a.Doctor)
+                .Where(a => a.DateTime.Date == dateTime)
+                .ToListAsync();
+                
+        }
+
+        public async Task<IEnumerable<AppointmentModel>> GetAppointmentsForPatientTodayAsync(int patientId)
+        {
+            var today = DateTime.Today;
+            return await _context.Appointment
+                .Include(a => a.Patient)
+                .Include(a => a.Doctor)
+                .Where(a => a.PatientId == patientId && a.DateTime.Date == today)
                 .ToListAsync();
         }
         

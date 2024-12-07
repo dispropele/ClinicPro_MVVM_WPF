@@ -41,7 +41,7 @@
                 <TextBlock
                     Style="{StaticResource Text_Style}"
                     FontSize="24"
-                    Text="Текущий пациент"
+                    Text="Выбранный пациент"
                     Margin="40 0 0 0"
                     VerticalAlignment="Bottom"/>
 

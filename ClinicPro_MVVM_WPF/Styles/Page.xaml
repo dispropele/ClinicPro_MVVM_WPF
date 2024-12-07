@@ -9,7 +9,7 @@
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TranslateTransform X="0"
-                                    Y="50"/>
+                                    Y="25"/>
             </Setter.Value>
         </Setter>
 
@@ -31,10 +31,10 @@
                                          From="0"
                                          To="1"/>
                         <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                         From="50"
+                                         From="25"
                                          To="0"
-                                         Duration="0:0:0.8"
-                                         DecelerationRatio="0.6"/>
+                                         Duration="0:0:0.6"
+                                         DecelerationRatio="0.4"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>

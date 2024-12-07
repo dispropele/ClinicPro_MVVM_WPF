@@ -1,0 +1,135 @@
+<UserControl x:Class="ClinicPro_MVVM_WPF.View.Admin.DoctorsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:utils="clr-namespace:ClinicPro_MVVM_WPF.Utils"
+             Style="{StaticResource Page_Style}"
+             Height="490"
+             Width="525">
+    <Grid>
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Resources/background.png"
+                            Stretch = "None"/>
+            </Border.Background>
+        </Border>
+        
+        <Border CornerRadius="20"
+                Background="#709DFF"
+                Height="490"
+                Width="525"
+                Opacity="0.85"/>
+        
+        <ScrollViewer Height="350"
+                      Margin="0 0 0 50">
+                
+            <ItemsControl ItemsSource="{Binding Doctors}">
+                
+                <ItemsControl.ItemTemplate>
+                    
+                    <DataTemplate>
+                        
+                        <Border Background="#BAC3EF"
+                                Width="420"
+                                Height="135"
+                                CornerRadius="10"
+                                Margin="0 5 0 15">
+                            <Grid>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding DoctorFIO}"
+                                               Style="{StaticResource Text_Style}"
+                                               Margin="20 10 0 0"
+                                               Foreground="Black"/>
+                                    <DockPanel LastChildFill="False"
+                                               Margin="20 10 0 0">
+                                        <TextBlock Text="Категория врача:"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"
+                                                   Foreground="Black"/>
+                                        <TextBlock Text="{Binding Specialization.NameSpecialization}"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="16"
+                                                   Foreground="Black"/>
+                                    </DockPanel>
+                                    <DockPanel LastChildFill="False"
+                                               Margin="20 10 0 0">
+                                        <TextBlock Text="Записей к врачу:"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"
+                                                   Foreground="Black"/>
+                                        <TextBlock Text="{Binding CountAppointments}"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="16"
+                                                   Foreground="Black"/>
+                                    </DockPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"
+                                            HorizontalAlignment="Right">
+                                    <Button Background="#759CFF"
+                                            Height="50"
+                                            Width="100"
+                                            Margin="0 10 10 10"
+                                            Style="{StaticResource RecordButtonStyle}"
+                                            Command="{Binding DataContext.ViewDoctorDataCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding DoctorId}">
+                                        <TextBlock Text="Данные"
+                                                   TextDecorations="Underline"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"/>
+                                    </Button>
+                                    <Button Background="#FB7474"
+                                            Height="50"
+                                            Width="100"
+                                            Style="{StaticResource RecordButtonStyle}"
+                                            Margin="0  0 10 0"
+                                            Command="{Binding DataContext.DeleteDoctorDataCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding DoctorId}">
+                                        <TextBlock Text="Удалить"
+                                                   TextDecorations="Underline"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        
+                    </DataTemplate>
+                    
+                </ItemsControl.ItemTemplate>
+                
+            </ItemsControl>
+                
+        </ScrollViewer>
+        
+        <Button Height="60"
+                Width="420"
+                Style="{StaticResource RecordButtonStyle}"
+                VerticalAlignment="Bottom"
+                Margin="0 0 0 15"
+                Command="{Binding AddNewDoctorCommand}">
+            <TextBlock Text="Добавить врача"
+                       TextDecorations="Underline"
+                       Style="{StaticResource Text_Style}"
+                       Margin="0 0 0 0"
+                       FontSize="22"/>
+        </Button>
+        
+        <TextBlock Text="Список врачей"
+                   Style="{StaticResource Text_Style}"
+                   Margin="0 10 0 0"
+                   FontSize="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
+        
+        
+        <utils:Loading Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+        
+    </Grid>
+</UserControl>

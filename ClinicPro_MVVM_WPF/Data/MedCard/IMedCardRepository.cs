@@ -12,5 +12,5 @@ public interface IMedCardRepository
 
     Task<IEnumerable<MedCardModel>> GetMedCardByFamilyAsync(string lastName);
     Task<IEnumerable<MedCardModel>> GetMedCardByDateOfBirthAsync(string dateOfBirth);
-    Task<MedCardModel?> GetMedCardByPatientAsync(int? patientId);
+    Task<MedCardModel> GetMedCardByPatientAsync(int patientId);
 }

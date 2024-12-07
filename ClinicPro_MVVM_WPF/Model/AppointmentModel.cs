@@ -24,15 +24,22 @@ namespace ClinicPro_MVVM_WPF.Model
         [Required]
         [Column("date_time")]
         public DateTime DateTime { get; set; }
+
+        [Column("reason")]
+        public string Reason { get; set; }
         
         [Required]
         [Column("status")]
         public string Status { get; set; } // "Запланирован", "Выполнен", "Отменен"
-        
+
         [Column("reason_cancel")]
-        public string? ReasonCancel { get; set; }
-
-
+        public string? ReasonCancel { get; set; } 
+        
+        [NotMapped]
+        public string GetStatusRu => Status == "Scheduled" ? "Запланировано" : "Отменено";
+        [NotMapped]
+        public string GetDateTimeString => DateTime.ToString("dd.MM.yy HH:mm");
+        
         public virtual PatientModel Patient { get; set; } = null!; // Навигационное свойство для пациента
         public virtual DoctorModel Doctor { get; set; } = null!; // Навигационное свойство для врача
 

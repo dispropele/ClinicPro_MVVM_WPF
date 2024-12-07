@@ -1,6 +1,9 @@
 ﻿
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ClinicPro_MVVM_WPF.Data;
+using ClinicPro_MVVM_WPF.Data.Appointment;
 
 namespace ClinicPro_MVVM_WPF.Model
 {
@@ -23,7 +26,7 @@ namespace ClinicPro_MVVM_WPF.Model
         
         [StringLength(30)]
         [Column("patronymic")]
-        public string? Patronymic { get; set; }
+        public string? Patronymic { get; set; } = string.Empty;
         
         [StringLength(5)]
         [Column("office_number")]
@@ -44,15 +47,28 @@ namespace ClinicPro_MVVM_WPF.Model
         [Column("photo")]
         public byte[]? Photo { get; set; } // Для хранения изображения
         
-        [Required]
-        [Column("hash_password")]
-        public string HashPassword { get; set; } = string.Empty;
+        [Column("user_id")]
+        [ForeignKey("User")]
+        public int userId { get; set; }
         
         [Required]
         [Column("specializ_id")]
         [ForeignKey("Specialization")]
         public int SpecializId { get; set; }
         
+        public virtual UserModel User { get; set; }
         public virtual SpecializationModel Specialization { get; set; }
+        
+        [NotMapped]
+        public string DoctorFIO => $"{LastName} {FirstName[0]}. {Patronymic?[0]}.";
+        
+        [NotMapped]
+        public int CountAppointments { get; set; }
+        
+        public async Task CalculateAppointmentCount(AppointmentRepository appointmentRepository)
+        {
+            CountAppointments = await appointmentRepository.GetAppointmentCountByDoctor(DoctorId);
+        }
+        
     }
 }

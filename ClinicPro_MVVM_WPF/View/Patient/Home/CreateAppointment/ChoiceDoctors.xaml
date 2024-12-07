@@ -1,0 +1,164 @@
+<UserControl x:Class="ClinicPro_MVVM_WPF.View.Patient.Home.CreateAppointment.ChoiceDoctors"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:utils="clr-namespace:ClinicPro_MVVM_WPF.Utils"
+             Style="{StaticResource Page_Style}"
+             Height="490"
+             Width="525">
+    <Grid>
+        <Border CornerRadius="20"
+                Background="#709DFF"
+                Height="490"
+                Width="525"
+                Opacity="0.85"
+                VerticalAlignment="Center"/>
+        
+        <Button Style="{StaticResource ButtonNoHoverStyle}"
+                Height="60"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Width="80"
+                Command="{Binding BackToCommand}">
+            <Image Source="/Resources/back.png"
+                   Width="46"/>
+        </Button>
+        
+        <TextBlock Text="Выбор врача"
+                   Style="{StaticResource Text_Style}"
+                   Margin="0 15 0 0"
+                   FontSize="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
+        
+        <!--// Speciality //-->
+        <DockPanel LastChildFill="False"
+                   Width="440"
+                   Height="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="20 65 0 0">
+            <TextBlock Text="Специальность:"
+                       Foreground="Black"
+                       FontSize="18"
+                       Style="{StaticResource Text_Style}"
+                       Margin="0 0 0 0"/>
+            <ComboBox Style="{StaticResource TransparentComboBox}"
+                      Width="240"
+                      Height="35"
+                      Margin="10 0 0 0"
+                      Text="{Binding SearchText,
+                      UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Specialization}"/>
+            <Button Width="25"
+                    Height="25"
+                    Style="{StaticResource ButtonNoHoverStyle}"
+                    DockPanel.Dock="Right"
+                    Command="{Binding SearchDoctorBySpecializationCommand}">
+                <Image Source="/Resources/find.png"/>
+            </Button>
+        </DockPanel>
+        
+        <ScrollViewer Width="525"
+                      Height="370"
+                      VerticalAlignment="Bottom">
+            
+            <ItemsControl ItemsSource="{Binding Doctors}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"
+                               ItemHeight="240"
+                               ItemWidth="240"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="#BAC3EF"
+                            Width="220"
+                            Height="220"
+                            CornerRadius="10"
+                            VerticalAlignment="Top">
+                        <Grid>
+                            <Border Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    Margin="10 10 0 0"
+                                    BorderThickness="1"
+                                    BorderBrush="White">
+                                <Image Source="{Binding Photo, 
+                                       Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                                       MaxHeight="100"
+                                       MaxWidth="100"/>
+                            </Border>
+                            <!--// Specialization //-->
+                            <TextBlock Grid.Row="1"
+                                       VerticalAlignment="Bottom"
+                                       Text="Специальность:"
+                                       FontFamily="/Fonts/#JetBrains Mono"
+                                       Margin="10 0 0 0"/>
+                            <TextBlock Grid.Row="1"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Left"
+                                       Text="{Binding Specialization.NameSpecialization}"
+                                       FontFamily="/Fonts/#JetBrains Mono"
+                                       Margin="110 0 0 0"/>
+                            
+                            <!--// FIO //-->
+                            <TextBlock Grid.Row="2"
+                                       VerticalAlignment="Bottom"
+                                       Text="ФИО:"
+                                       FontFamily="/Fonts/#JetBrains Mono"
+                                       Margin="10 0 0 0"/>
+                            <TextBlock Grid.Row="2"
+                                       VerticalAlignment="Bottom"
+                                       Text="{Binding DoctorFIO}"
+                                       FontFamily="/Fonts/#JetBrains Mono"
+                                       Margin="55 0 0 0"/>
+                            
+                            <!--// PhoneNumber //-->
+                            <TextBlock Grid.Row="3"
+                                       VerticalAlignment="Bottom"
+                                       Text="Телефон:"
+                                       FontFamily="/Fonts/#JetBrains Mono"
+                                       Margin="10 0 0 0"/>
+                            <TextBlock Grid.Row="3"
+                                       VerticalAlignment="Bottom"
+                                       Text="{Binding PhoneNumber}"
+                                       FontFamily="/Fonts/#JetBrains Mono"
+                                       Margin="70 0 0 0"/>
+                            
+                            <!--// Choice Button //-->
+                            <Button Grid.Row="4"
+                                    Height="30"
+                                    Width="100"
+                                    Style="{StaticResource RecordButtonStyle}"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 0 5 3"
+                                    Command="{Binding DataContext.SelectDoctorCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding DoctorId}">
+                                <TextBlock Text="Выбрать"
+                                           FontSize="14"
+                                           FontFamily="/Fonts/#JetBrains Mono"
+                                           TextDecorations="Underline"/>
+                            </Button>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="115"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+            
+        </ScrollViewer>
+        
+        <!-- Анимация загрузки -->
+        <utils:Loading Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        
+    </Grid>
+</UserControl>

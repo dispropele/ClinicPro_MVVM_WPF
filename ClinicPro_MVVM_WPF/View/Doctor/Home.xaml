@@ -3,15 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor"
              xmlns:load="clr-namespace:ClinicPro_MVVM_WPF.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="622"
              Style="{StaticResource Page_Style}">
-
-    <UserControl.DataContext>
-        <vm:HomeVM/>
-    </UserControl.DataContext>
 
     <Grid x:Name="Main">
 

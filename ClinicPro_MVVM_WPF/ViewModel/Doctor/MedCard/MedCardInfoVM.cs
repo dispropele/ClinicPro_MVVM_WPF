@@ -10,31 +10,52 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard;
 
 public class MedCardInfoVM : BaseViewModel
 {
-    private static MedCardVM _parentVM = new MedCardVM();
+    private static MedCardVM _parentVM;
     
-    public MedCardInfoVM(MedCardVM parentVM)
+    public MedCardInfoVM(MedCardVM parentVM, int patientId)
     {
-        CurrentPatientId = 1;
+        CurrentPatientId = patientId;
         _parentVM = parentVM;
         
-        Task.Run(()=>LoadMedCardAsync(CurrentPatientId));
+       _ = LoadMedCardAsync(CurrentPatientId);
+       
     }
     
+    private MedCardViewAllRecord MedCardViewAllRecord;
 
     public ICommand ShowMenuMedCardCommand => new RelayCommand(o => _parentVM.ShowMenuMedCard(o));
+    public ICommand ViewRecordMedCardCommand => new RelayCommand(o => ShowRecord(o));
+    public ICommand CreateRecordCommand => new RelayCommand(o => CreateRecord(o));
+
+    private void ShowRecord(object obj) => _parentVM.CurrentMedCardView = new MedCardViewAllRecord(_parentVM, CurrentMedCard.medcardId);
+    private void CreateRecord(object obj) => _parentVM.CurrentMedCardView = new MedCardCreateRecord(_parentVM, _parentVM.DoctorId);
     
-    private void UpdateMedCardFio()
+    private void UpdateMedCardInfo()
     {
         if (CurrentMedCard?.Patient == null)
         {
             MedCardFio = "Неизвестный пациент";
-            Console.WriteLine("NOOO PATIENT");
         }
         else
         {
             MedCardFio =
-                $"{CurrentMedCard.Patient.LastName} {CurrentMedCard.Patient.FirstName} {CurrentMedCard.Patient.Patronymic}";
-            Console.WriteLine("UpdateMedCardFio");
+                $"{CurrentMedCard.Patient.lastName} {CurrentMedCard.Patient.firstName} {CurrentMedCard.Patient.patronymic}";
+            Gender = CurrentMedCard.Patient.gender.ToString();
+            DateOfBirth = $"{CurrentMedCard.Patient.dateOfBirth:dd.MM.yyyy}";
+            PhoneNumber = CurrentMedCard.Patient.phoneNumber ?? string.Empty;
+            EmailAddress = CurrentMedCard.Patient.email ?? string.Empty;
+            PolisNumber = CurrentMedCard.Patient.polisNumber;
+        }
+    }
+
+    private string _medCardNumber;
+    public string MedCardNumber
+    {
+        get => _medCardNumber;
+        set
+        {
+            _medCardNumber = value;
+            OnPropertyChanged();
         }
     }
     
@@ -49,6 +70,61 @@ public class MedCardInfoVM : BaseViewModel
         }
     }
 
+    private string _gender;
+    public string Gender
+    {
+        get => _gender;
+        set
+        {
+            _gender = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private string _dateOfBirth;
+    public string DateOfBirth
+    {
+        get => _dateOfBirth;
+        set
+        {
+            _dateOfBirth = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _phoneNumber;
+    public string PhoneNumber
+    {
+        get => _phoneNumber;
+        set
+        {
+            _phoneNumber = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private string _emailAddress;
+    public string EmailAddress
+    {
+        get => _emailAddress;
+        set
+        {
+            _emailAddress = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _polisNumber;
+    public string PolisNumber
+    {
+        get => _polisNumber;
+        set
+        {
+            _polisNumber = value;
+            OnPropertyChanged();
+        }
+    }
+    
     private async Task LoadMedCardAsync(int patientId)
     {
         IsLoading = true;
@@ -57,18 +133,15 @@ public class MedCardInfoVM : BaseViewModel
             using (var context = new ClinicDbContext())
             {
                 var repository = new MedCardRepository(context);
-                MedCardModel? medCard = await repository.GetMedCardByPatientAsync(patientId);
-                CurrentMedCard = medCard;
+                CurrentMedCard = await repository.GetMedCardByPatientAsync(patientId);
                 
                 if (CurrentMedCard != null) // Добавлена проверка на null
                 {
-                    UpdateMedCardFio();
-                    Console.WriteLine("Zaversheno.");
+                    UpdateMedCardInfo();
                 }
                 else
                 { 
-                    Console.WriteLine("MedCard не найден.");
-                    MedCardFio = "Нет ФИО"; // Или другое сообщение
+                    MessageBox.Show("Была передана пустая мед карта", "Внимание"); // Или другое сообщение
                 }
             }
         }
@@ -111,7 +184,7 @@ public class MedCardInfoVM : BaseViewModel
         set
         {
             _isLoading = value;
-            OnPropertyChanged(nameof(IsLoading));
+            OnPropertyChanged();
         }
     }
     

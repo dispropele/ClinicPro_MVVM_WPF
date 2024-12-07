@@ -13,7 +13,8 @@ namespace ClinicPro_MVVM_WPF
     public partial class App : Application
     {
         
-        
     }
-
+    
+    
+    
 }

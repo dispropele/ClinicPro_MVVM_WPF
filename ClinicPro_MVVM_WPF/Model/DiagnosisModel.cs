@@ -12,17 +12,8 @@ namespace ClinicPro_MVVM_WPF.Model
         public int DiagnosisId { get; set; }
         
         [Required]
-        [Column("code")]
-        public string Code { get; set; } // Код диагноза (например, МКБ-10)
-        
-        [Required]
         [Column("name")]
         public string Name { get; set; }
-        
-        [Required]
-        [Column("description")]
-        public string Description { get; set; }
-        
         
     }
 }

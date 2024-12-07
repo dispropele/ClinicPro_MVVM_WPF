@@ -1,16 +1,9 @@
 <UserControl x:Class="ClinicPro_MVVM_WPF.View.Doctor.MedCard.MedCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:medCard="clr-namespace:ClinicPro_MVVM_WPF.ViewModel.Doctor.MedCard"
              Style="{StaticResource Page_Style}"
              Height="490"
              Width="525">
-    
-    <UserControl.DataContext>
-        <medCard:MedCardVM/>
-    </UserControl.DataContext>
     
     <Grid>
 

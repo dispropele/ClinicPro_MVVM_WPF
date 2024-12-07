@@ -9,7 +9,6 @@ public interface IDoctorRepository
     Task AddDoctorAsync(DoctorModel doctor);
     Task UpdateDoctorAsync(DoctorModel doctor);
     Task DeleteDoctorAsync(int doctorId);
-    
-    
-    
+
+    Task<int> GetDoctorIdByUserId(int userId);
 }

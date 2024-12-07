@@ -18,10 +18,12 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
         private string _appointmentTodayOne;
         private string _appointmentTodayTwo;
         private DispatcherTimer _timerAppointment;
-        private static int ID = 2;
 
-        public HomeVM()
+        private int DoctorId { get; set; }
+
+        public HomeVM(int doctorId)
         {
+            DoctorId = doctorId;
             InitializeTimers(); // Вызов метода инициализации таймеров
             Task.Run(() => LoadTodayAppointmentsAsync()); // Инициализация данных при загрузке ViewModel
         }
@@ -51,7 +53,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
             set
             {
                 _appointmentTodayOne = value;
-                OnPropertyChanged(nameof(AppointmentTodayOne));
+                OnPropertyChanged();
             }
         }
 
@@ -61,7 +63,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
             set
             {
                 _appointmentTodayTwo = value;
-                OnPropertyChanged(nameof(AppointmentTodayTwo));
+                OnPropertyChanged();
             }
         }
 
@@ -76,26 +78,26 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
                 if (sortedAppointments.Count >= 1)
                 {
                     var firstAppointment = sortedAppointments[0];
-                    AppointmentTodayOne = $"{firstAppointment.DateTime:t} {firstAppointment.Patient.LastName} {firstAppointment.Patient.FirstName[0]}. {firstAppointment.Patient.Patronymic[0]}.";
+                    AppointmentTodayOne = $"{firstAppointment.DateTime:t} {firstAppointment.Patient.lastName} {firstAppointment.Patient.firstName[0]}. {firstAppointment.Patient.patronymic?[0]}.";
                 }
                 else
                 {
-                    AppointmentTodayOne = "Нет ближайших записей.";
+                    AppointmentTodayOne = "Нет ближайших приемов.";
                 }
 
                 if (sortedAppointments.Count == 2)
                 {
                     var secondAppointment = sortedAppointments[1];
-                    AppointmentTodayTwo = $"{secondAppointment.DateTime:t} {secondAppointment.Patient.LastName} {secondAppointment.Patient.FirstName[0]}. {secondAppointment.Patient.Patronymic[0]}.";
+                    AppointmentTodayTwo = $"{secondAppointment.DateTime:t} {secondAppointment.Patient.lastName} {secondAppointment.Patient.firstName[0]}. {secondAppointment.Patient.patronymic?[0]}.";
                 }
                 else
                 {
-                    AppointmentTodayTwo = "Нет следующей записи.";
+                    AppointmentTodayTwo = "Нет следующего приема.";
                 }
             }
             else
             {
-                AppointmentTodayOne = "Нет ближайших записей.";
+                AppointmentTodayOne = "Нет ближайших приемов.";
                 AppointmentTodayTwo = string.Empty;
             }
 
@@ -110,7 +112,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
             set
             {
                 _todayAppointments = value;
-                OnPropertyChanged(nameof(TodayAppointments));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(CountAppointment));
             }
         }
@@ -124,7 +126,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
                 using (var context = new ClinicDbContext())
                 {
                     var repository = new AppointmentRepository(context);
-                    var appointments = await repository.GetAppointmentsForDoctorTodayAsync(ID);
+                    var appointments = await repository.GetAppointmentsForDoctorTodayAsync(DoctorId);
                     TodayAppointments = new ObservableCollection<AppointmentModel>(appointments);
                     UpdateAppointmentToday();
                 }
@@ -151,7 +153,7 @@ namespace ClinicPro_MVVM_WPF.ViewModel.Doctor
             set
             {
                 _isLoading = value;
-                OnPropertyChanged(nameof(IsLoading));
+                OnPropertyChanged();
             }
         }
 

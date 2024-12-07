@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>LogoNoBg.ico</ApplicationIcon>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,29 +24,50 @@
     <None Remove="Resources\arrow_back.png" />
     <None Remove="Resources\back.png" />
     <None Remove="Resources\background.png" />
+    <None Remove="Resources\calendar.png" />
     <None Remove="Resources\category.png" />
     <None Remove="Resources\chat_bubble.png" />
+    <None Remove="Resources\doctor.png" />
     <None Remove="Resources\exit.png" />
     <None Remove="Resources\Eye off.png" />
     <None Remove="Resources\Eye.png" />
+    <None Remove="Resources\female.png" />
     <None Remove="Resources\find.png" />
     <None Remove="Resources\Home.png" />
+    <None Remove="Resources\Key.png" />
     <None Remove="Resources\Log out.png" />
     <None Remove="Resources\logo.png" />
+    <None Remove="Resources\LogoNoBg.png" />
+    <None Remove="Resources\male.png" />
     <None Remove="Resources\MedCard.png" />
     <None Remove="Resources\medicines.png" />
     <None Remove="Resources\Settings.png" />
     <None Remove="Resources\User.png" />
+    <None Remove="Resources\UserWhite.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <Resource Include="Resources\LogoNoBg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Resources\danger.png" />
+    <Content Include="LogoNoBg.ico" />
+    <Resource Include="Resources\danger.png" />
+    <None Remove="Resources\Edit.png" />
+    <Resource Include="Resources\edit.png" />
+    <None Remove="Resources\mail.png" />
+    <Resource Include="Resources\mail.png" />
+    <None Remove="Resources\phone.png" />
+    <Resource Include="Resources\phone.png" />
   </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		
+	</ItemGroup>
 
   <ItemGroup>
     <Resource Include="Fonts\JetBrainsMono-Bold-Italic.ttf">
@@ -86,10 +109,16 @@
     <Resource Include="Resources\background.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\calendar.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\category.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\chat_bubble.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\doctor.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\exit.png">
@@ -101,16 +130,25 @@
     <Resource Include="Resources\Eye.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\female.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\find.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Home.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Key.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Log out.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\male.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\MedCard.png">
@@ -123,6 +161,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\User.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\UserWhite.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -145,6 +186,31 @@
   <ItemGroup>
     <Page Update="Styles\YesExitButton.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="View\Admin\Doctors\DoctorsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Utils\Lang\Lang-ru.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Patient\Home\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Patient\Home\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Patient\Appointment\AppointmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
 

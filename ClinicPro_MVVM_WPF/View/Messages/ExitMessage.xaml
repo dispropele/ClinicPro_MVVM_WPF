@@ -5,64 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True"
-        Title="ExitMessage" Height="150" Width="250" WindowStartupLocation="CenterOwner">
+        Title="ExitMessage" Height="600" Width="800" WindowStartupLocation="CenterOwner">
     <Grid>
+        
+        <Border Background="#484848"
+                Opacity="0.5"/>
+        
         <!-- Фон сообщения -->
-        <Border Background="#304068"
-                CornerRadius="20"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"/>
-
-        <TextBlock Text="Вы точно хотите"
-                   Style="{StaticResource Text_Style}"
-                   Grid.ColumnSpan="2"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center"
-                   Margin="0 15 0 0"/>
-        <TextBlock Text="выйти?"
-           Style="{StaticResource Text_Style}"
-           Grid.ColumnSpan="2"
-           VerticalAlignment="Center"
-           HorizontalAlignment="Center"
-           Margin="0 15 0 0"/>
-
-        <!--// Кнопка ДА //-->
-
-        <Button Grid.Column="0"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Style="{StaticResource YesExitButtonStyle}"
-                Width="80"
-                HorizontalAlignment="Left"
-                Click="YesButtonClick">
-            <TextBlock Text="Да"
+        <Grid Height="150"
+              Width="250">
+            <Border Background="#304068"
+                            CornerRadius="20"
+                            Grid.RowSpan="2"
+                            Grid.ColumnSpan="2"/>
+            
+                    <TextBlock Text="Вы точно хотите"
+                               Style="{StaticResource Text_Style}"
+                               Grid.ColumnSpan="2"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Margin="0 15 0 0"/>
+                    <TextBlock Text="выйти?"
                        Style="{StaticResource Text_Style}"
-                       Margin="0 0 0 0"
-                       HorizontalAlignment="Center"/>
-        </Button>
-        <!--// Кнопка Нет //-->
-        <Button Grid.Column="1"
-                Grid.Row="1"
-                Style="{StaticResource NoExitButtonStyle}"
-                Width="80"
-                HorizontalAlignment="Right"
-                Click="NoButtonClick">
-            <TextBlock Text="Нет"
-                       Style="{StaticResource Text_Style}"
-                       Margin="0 0 0 0"
-                       HorizontalAlignment="Center"/>
-        </Button>
-
+                       Grid.ColumnSpan="2"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="0 15 0 0"/>
+            
+                    <!--// Кнопка ДА //-->
+            
+                    <Button Grid.Column="0"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Style="{StaticResource YesExitButtonStyle}"
+                            Width="80"
+                            HorizontalAlignment="Left"
+                            Click="YesButtonClick">
+                        <TextBlock Text="Да"
+                                   Style="{StaticResource Text_Style}"
+                                   Margin="0 0 0 0"
+                                   HorizontalAlignment="Center"/>
+                    </Button>
+                    <!--// Кнопка Нет //-->
+                    <Button Grid.Column="1"
+                            Grid.Row="1"
+                            Style="{StaticResource NoExitButtonStyle}"
+                            Width="80"
+                            HorizontalAlignment="Right"
+                            Click="NoButtonClick">
+                        <TextBlock Text="Нет"
+                                   Style="{StaticResource Text_Style}"
+                                   Margin="0 0 0 0"
+                                   HorizontalAlignment="Center"/>
+                    </Button>
+            
+                    
+                    
+            
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+        </Grid>
         
-        
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
     </Grid>
 </Window>

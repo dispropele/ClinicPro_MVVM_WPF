@@ -13,13 +13,12 @@ public class MedCardMenuVM : BaseViewModel
     private readonly IAppointmentRepository _appointmentRepository;
     private readonly ClinicDbContext _context = new ClinicDbContext();
     
-    public MedCardMenuVM(MedCardVM parentVM)
+    public MedCardMenuVM(MedCardVM parentVM, int doctorId)
     {
         _parentVM = parentVM;
         _appointmentRepository = new AppointmentRepository(_context);
         
-        DoctorId = 1; // Здесь можно установить текущий ID врача, если он задаётся динамически
-        CurrentPatientId = 1; // Текущий ID пациента
+        DoctorId = doctorId;
         
         InitializeCommands();
     }
@@ -27,7 +26,7 @@ public class MedCardMenuVM : BaseViewModel
     private void InitializeCommands()
     {
         ShowSearchCommand = new RelayCommand(ShowSearch);
-        ShowInfoMedCardCommand = new RelayCommand(async o => await CheckPatientStatusAndShowInfoAsync(o));
+        ShowInfoMedCardCommand = new RelayCommand(o => CheckMedCardInfo(o));
     }
     public ICommand ShowSearchCommand { get; private set; }
     public ICommand ShowInfoMedCardCommand { get; private set; }
@@ -37,18 +36,19 @@ public class MedCardMenuVM : BaseViewModel
         _parentVM.ShowSearch(parameter);
     }
     
-    private async Task CheckPatientStatusAndShowInfoAsync(object obj)
+    private void CheckMedCardInfo(object obj)
     {
         try
         {
-            bool isInProgress = await _appointmentRepository.IsPatientInProgressAsync(DoctorId, CurrentPatientId);
-            if (isInProgress)
+            bool isMedCardInfo = _parentVM.MedCardInfoVM == null ? false : true;
+            
+            if (isMedCardInfo)
             {
                 _parentVM.ShowInfoMedCard(obj);
             }
             else
             {
-                MessageBox.Show("Пациент со статусом InProgress не найден.", 
+                MessageBox.Show("Пациент не выбран.", 
                     "Предупреждение", 
                     MessageBoxButton.OK, 
                     MessageBoxImage.Warning);

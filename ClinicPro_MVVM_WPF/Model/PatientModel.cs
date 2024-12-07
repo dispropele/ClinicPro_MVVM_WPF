@@ -10,49 +10,56 @@ namespace ClinicPro_MVVM_WPF.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("patient_id")]
-        public int PatientId { get; set; }
+        public int patientId { get; set; }
         
         [Required]
         [StringLength(50)]
         [Column("polis_number")]
-        public string PolisNumber { get; set; } = string.Empty;
+        public string polisNumber { get; set; } = string.Empty;
         
         [Required]
         [StringLength(50)]
         [Column("first_name")]
-        public string FirstName { get; set; } = string.Empty;
+        public string firstName { get; set; } = string.Empty;
         
         [Required]
         [StringLength(50)]
         [Column("last_name")]
-        public string LastName { get; set; } = string.Empty;
+        public string lastName { get; set; } = string.Empty;
         
         [StringLength(50)]
         [Column("patronymic")]
-        public string? Patronymic { get; set; }
+        public string? patronymic { get; set; } = string.Empty;
         
         [Column("date_of_birth")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime? dateOfBirth { get; set; }
         
         [Required]
         [StringLength(1)]
         [Column("gender")]
-        public char Gender { get; set; } // "M" или "F"
+        public char gender { get; set; } // "M" или "F"
         
         [Phone]
         [StringLength(15)]
         [Column("phone_number")]
-        public string? PhoneNumber { get; set; }
+        public string? phoneNumber { get; set; }
         
         [EmailAddress]
         [StringLength(100)]
         [Column("email")]
-        public string? Email { get; set; }
+        public string? email { get; set; }
         
-        [Required]
-        [Column("hash_password")]
-        public string HashPassword { get; set; }  = string.Empty;
+        [Column("user_id")]
+        [ForeignKey("User")]
+        public int userId { get; set; }
         
+        public virtual UserModel User { get; set; }
         
+        [NotMapped]
+        public string dateOfBirthString => $"{dateOfBirth:dd.MM.yyyy}";
+        [NotMapped]
+        public string Fio => $"{lastName} {firstName} {patronymic}";
+        [NotMapped]
+        public string Summary => $"{lastName} {firstName[0]}. {patronymic?[0]}. ({dateOfBirth:yyyy}г.)";
     }
 }

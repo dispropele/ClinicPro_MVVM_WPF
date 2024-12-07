@@ -1,5 +1,6 @@
 ﻿
 using System.Windows.Controls;
+using ClinicPro_MVVM_WPF.ViewModel.Doctor;
 
 
 namespace ClinicPro_MVVM_WPF.View.Doctor
@@ -9,9 +10,11 @@ namespace ClinicPro_MVVM_WPF.View.Doctor
     /// </summary>
     public partial class Appointment : UserControl
     {
-        public Appointment()
+        public Appointment(int doctorId)
         {
             InitializeComponent();
+            Console.WriteLine(doctorId);
+            DataContext = new AppointmentVM(doctorId);
         }
     }
 }

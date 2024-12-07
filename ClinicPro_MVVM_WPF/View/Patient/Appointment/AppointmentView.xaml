@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="ClinicPro_MVVM_WPF.View.Patient.Appointment.AppointmentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Style="{StaticResource Page_Style}"
+             Width="525"
+             Height="490">
+    <Grid>
+        
+        <Border CornerRadius="20"
+                Background="#709DFF"
+                Height="490px"
+                Width="525px"
+                Opacity="0.85">
+        </Border>
+        
+        <ScrollViewer>
+            
+            <ItemsControl ItemsSource="{Binding Appointments}">
+                <ItemsControl.Style>
+                    <Style TargetType="ItemsControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Appointments.Count}" Value="0">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBlock Text="Нет записей" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
+                <ItemsControl.ItemTemplate>
+            
+                    <DataTemplate>
+            
+                        <StackPanel Orientation="Vertical"
+                        Margin="0 30 0 0">
+                            <Border Background="#BAC3EF"
+                                                CornerRadius="10"
+                                                Width="420"
+                                                Height="190">
+                                <Grid>
+                                    <StackPanel>
+                                    <!--// Fio //-->
+                                    <TextBlock Text="{Binding Doctor.DoctorFIO}"
+                                               Foreground="Black"
+                                               Style="{StaticResource Text_Style}"
+                                               Margin="20 15 0 0"/>
+                                    <!--// DateTime //-->
+                                    <DockPanel Margin="20 25 0 0">
+                                        <TextBlock Text="Дата и время приема:"
+                                                   Foreground="Black"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"/>
+                                        <TextBlock Text="{Binding GetDateTimeString}"
+                                                   Foreground="Black"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="15 0 0 0"
+                                                   FontSize="16"/>
+                                    </DockPanel>
+                                    <!--// Reason //-->
+                                    <DockPanel Margin="20 5 0 5"
+                                               VerticalAlignment="Center">
+                                        <TextBlock Text="Специальность:"
+                                                   Foreground="Black"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"/>
+                                        <TextBlock Text="{Binding Doctor.Specialization.NameSpecialization}"
+                                                   Foreground="Black"
+                                                   Width="220"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="15 0 0 0"
+                                                   FontSize="16"/>
+                                    </DockPanel>
+                                    <!--// Status //-->
+                                    <DockPanel Margin="20 0 0 0">
+                                        <TextBlock Text="Статус:"
+                                                   Foreground="Black"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="0 0 0 0"
+                                                   FontSize="16"/>
+                                        <TextBlock Text="{Binding GetStatusRu}"
+                                                   Foreground="Black"
+                                                   Style="{StaticResource Text_Style}"
+                                                   Margin="15 0 0 0"
+                                                   FontSize="16"/>
+                                    </DockPanel>
+                                    
+                                    </StackPanel>
+                                    <Button Background="#FB7474"
+                                            Width="115"
+                                            Height="40"
+                                            Style="{StaticResource RecordButtonStyle}"
+                                            VerticalAlignment="Bottom"
+                                            Command="{Binding DataContext.CancelAppointmentCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding }"
+                                            HorizontalAlignment="Right"
+                                            Margin="0 0 10 10">
+                                        <TextBlock Text="Отменить"
+                                                   Style="{StaticResource Text_Style}"
+                                                   FontSize="16"
+                                                   Margin="0 0 0 0"/>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </StackPanel> 
+            
+                    </DataTemplate>
+            
+                </ItemsControl.ItemTemplate>
+            
+            </ItemsControl>
+            
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

@@ -9,28 +9,23 @@ public class ClinicDbContext : DbContext
     public DbSet<DoctorModel> Doctor { get; set; }
     public DbSet<MedCardModel> MedCard { get; set; }
     public DbSet<AppointmentModel> Appointment { get; set; }
-    public DbSet<MedRecordModel> Med_record { get; set; }
+    public DbSet<UserModel> User { get; set; }
+    public DbSet<MedRecordModel> Med_Record { get; set; }
     public DbSet<DiagnosisModel> Diagnosis { get; set; }
     public DbSet<SpecializationModel> Specialization { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ClinicDbContext()
     {
-        optionsBuilder.UseSqlServer("Server=DISPROPELE\\CLINICSQLSERVER,63453;Database=ClinicProDB;Trusted_Connection=True;User ID=dispropele;Password=masterkey;TrustServerCertificate=True;");
+        Database.EnsureCreated();
     }
 
-    public bool TestConnection()
-    {
-        try
-        {
-            Database.OpenConnection();
-            Database.CloseConnection();
-            return true;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("fail: " + e.Message);
-            return false;
-        }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {   
+        //Server=192.168.1.243\STUD_DB;Database=RMP_ClinicPro;Trusted_Connection=True; Integrated Security = True; TrustServerCertificate=True
+        //Server=DISPROPELE\CLINICSQLSERVER,63680;Database=ClinicProDB;Trusted_Connection=True;User ID=dispropele;Password=masterkey;TrustServerCertificate=True;
+        optionsBuilder.UseSqlServer("Server=192.168.1.243\\STUD_DB;Database=RMP_ClinicPro;Trusted_Connection=True; Integrated Security = True; TrustServerCertificate=True");
     }
+
+    
     
 }

@@ -51,7 +51,7 @@ public class MedCardRepository : IMedCardRepository
     public async Task<IEnumerable<MedCardModel>> GetMedCardByFamilyAsync(string lastName)
     {
         return await _context.MedCard.Include(md => md.Patient)
-                                     .Where(md => md.Patient.FirstName.Contains(lastName))
+                                     .Where(md => md.Patient.firstName.Contains(lastName))
                                      .ToListAsync();
     }
 
@@ -62,7 +62,7 @@ public class MedCardRepository : IMedCardRepository
             int parsedYear = parsedDate.Year; // Оптимизация: вычисляем год только один раз
             return await _context.MedCard
                 .Include(md => md.Patient)
-                .Where(md => md.Patient.DateOfBirth.GetValueOrDefault().Year == parsedYear) //GetValueOrDefault() вернет значение по умолчанию для DateTime, если оно равно null. В данном случае, это будет DateTime.MinValue, и у него есть Year.
+                .Where(md => md.Patient.dateOfBirth.GetValueOrDefault().Year == parsedYear) //GetValueOrDefault() вернет значение по умолчанию для DateTime, если оно равно null. В данном случае, это будет DateTime.MinValue, и у него есть Year.
                 .ToListAsync();
         }
         else
@@ -71,7 +71,7 @@ public class MedCardRepository : IMedCardRepository
         }
     }
 
-    public async Task<MedCardModel?> GetMedCardByPatientAsync(int? patientId)
+    public async Task<MedCardModel> GetMedCardByPatientAsync(int patientId)
     {
         return await _context.MedCard.Include(md => md.Patient)
                                      .FirstOrDefaultAsync(md => md.patientId == patientId);
